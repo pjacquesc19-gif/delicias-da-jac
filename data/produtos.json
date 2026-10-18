@@ -1,0 +1,1592 @@
+{
+  "meta": {
+    "brand": "Delícias da Jac",
+    "whatsapp": "5521985075217",
+    "whatsappLabel": "(21) 98507-5217",
+    "instagram": "deliciasda_jac",
+    "owner": "Renata Jacques",
+    "logo": "logo.png",
+    "ownerPhoto": "renata-jacques.jpg",
+    "about": [
+      "Renata Jacques, proprietária da Delícias da Jac, é psicóloga e se dedica à confeitaria há aproximadamente cinco anos. Hoje é especializada em suspiros, macarons e brownies.",
+      "Nesse caminho, já atendeu mais de 2.000 festas, preparando cada encomenda de forma artesanal.",
+      "Nossa missão é oferecer atendimento de excelência e encantar os convidados por meio de doces artesanais."
+    ]
+  },
+  "categories": [
+    {
+      "id": "macarons",
+      "name": "Macarons",
+      "description": "Macarons individuais, caixinhas presenteáveis e torres."
+    },
+    {
+      "id": "pirulitos",
+      "name": "Pirulitos de Suspiro",
+      "description": "Modelos simples, modelados e premium, com temas sob consulta."
+    },
+    {
+      "id": "lembrancinhas",
+      "name": "Lembrancinhas",
+      "description": "Saquinhos, caixinhas, rosas e bonequinhas, com laço e tag."
+    },
+    {
+      "id": "suspiros-modelados",
+      "name": "Suspiros Modelados",
+      "description": "Suspiros modelados e suspiros 3D, com ou sem recheio e caixinha."
+    },
+    {
+      "id": "centros-de-mesa",
+      "name": "Centros de Mesa",
+      "description": "Centros de mesa com pirulitos de roseta, modelados ou premium."
+    },
+    {
+      "id": "torres-e-mini-suspiros",
+      "name": "Torres e Mini Suspiros",
+      "description": "Torres de suspiros em dois tamanhos e mini suspiros vendidos por peso."
+    },
+    {
+      "id": "brownies",
+      "name": "Brownies",
+      "description": "Brownies de 4 cm e 5 cm, com ou sem laço."
+    },
+    {
+      "id": "bem-casados",
+      "name": "Bem-casados e Bem-vividos",
+      "description": "Com doce de leite e cobertura de açúcar, com ou sem laço."
+    }
+  ],
+  "colors": [
+    {
+      "name": "Rosa",
+      "hex": "#F48FB1",
+      "consult": false
+    },
+    {
+      "name": "Azul",
+      "hex": "#4A90D9",
+      "consult": false
+    },
+    {
+      "name": "Verde",
+      "hex": "#5DBB63",
+      "consult": false
+    },
+    {
+      "name": "Amarelo",
+      "hex": "#F7D54A",
+      "consult": false
+    },
+    {
+      "name": "Lilás",
+      "hex": "#B57EDC",
+      "consult": false
+    },
+    {
+      "name": "Vermelho",
+      "hex": "#D64545",
+      "consult": false
+    },
+    {
+      "name": "Branco",
+      "hex": "#FFFFFF",
+      "consult": false
+    },
+    {
+      "name": "Laranja",
+      "hex": "#F5923E",
+      "consult": false
+    },
+    {
+      "name": "Preto",
+      "hex": "#222222",
+      "consult": false
+    },
+    {
+      "name": "Dourado",
+      "hex": "#D4AF37",
+      "consult": true
+    },
+    {
+      "name": "Prateado",
+      "hex": "#C0C0C0",
+      "consult": true
+    }
+  ],
+  "themes": [
+    "Arco-íris",
+    "Jardim encantado",
+    "Borboletas",
+    "Flores",
+    "Ursinhos",
+    "Safari",
+    "Fundo do mar",
+    "Patrulha Canina",
+    "Stitch",
+    "Casa da Gabby",
+    "Princesas",
+    "Minnie",
+    "Dinossauros"
+  ],
+  "products": [
+    {
+      "id": "macaron-individual",
+      "category": "macarons",
+      "name": "Macaron individual",
+      "description": "Macaron com sabores à escolha. Mínimo de 20 unidades da mesma cor.",
+      "price": 6.0,
+      "priceUnit": "por unidade",
+      "unit": [
+        "macaron",
+        "macarons"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": 20,
+      "quantity": "1 unidade",
+      "images": [],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro",
+        "Brigadeiro branco",
+        "Limão-siciliano",
+        "Maracujá",
+        "Caramelo",
+        "Ninho com Nutella",
+        "Pistache",
+        "Nozes"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": 20,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": "free",
+      "themes": [],
+      "customizable": true,
+      "notes": [
+        "Mínimo 20 da mesma cor",
+        "Cores especiais (neon, dourado e prateado): preço sob consulta"
+      ],
+      "featured": true,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "macaron-caixinha",
+      "category": "macarons",
+      "name": "Caixinha presenteável de macarons",
+      "description": "Caixinha com 1, 2 ou 3 macarons, com fita e tag.",
+      "price": null,
+      "priceUnit": "por caixinha",
+      "unit": [
+        "caixinha",
+        "caixinhas"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro",
+        "Brigadeiro branco",
+        "Limão-siciliano",
+        "Maracujá",
+        "Caramelo",
+        "Ninho com Nutella",
+        "Pistache",
+        "Nozes"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": "free",
+      "themes": [],
+      "customizable": true,
+      "notes": [
+        "Fita e tag",
+        "Cores especiais (neon, dourado e prateado): preço sob consulta"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [
+        {
+          "key": "macarons-na-caixinha",
+          "label": "Macarons na caixinha"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Caixinha com 1 macaron",
+          "options": {
+            "macarons-na-caixinha": "1 macaron"
+          },
+          "price": 8.0,
+          "minimumQuantity": null,
+          "quantity": "1 macaron",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Caixinha com 2 macarons",
+          "options": {
+            "macarons-na-caixinha": "2 macarons"
+          },
+          "price": 15.0,
+          "minimumQuantity": null,
+          "quantity": "2 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Caixinha com 3 macarons",
+          "options": {
+            "macarons-na-caixinha": "3 macarons"
+          },
+          "price": 22.0,
+          "minimumQuantity": null,
+          "quantity": "3 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "macaron-torre",
+      "category": "macarons",
+      "name": "Torre de macarons",
+      "description": "Torres de 4 a 10 andares, nas versões sem torre e com torre (suporte).",
+      "price": null,
+      "priceUnit": "por torre",
+      "unit": [
+        "torre",
+        "torres"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro",
+        "Brigadeiro branco",
+        "Limão-siciliano",
+        "Maracujá",
+        "Caramelo",
+        "Ninho com Nutella",
+        "Pistache",
+        "Nozes"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": "free",
+      "themes": [],
+      "customizable": true,
+      "notes": [
+        "Cores especiais (neon, dourado e prateado): preço sob consulta"
+      ],
+      "featured": true,
+      "available": true,
+      "selectors": [
+        {
+          "key": "tamanho",
+          "label": "Tamanho"
+        },
+        {
+          "key": "suporte",
+          "label": "Suporte"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Torre de macarons 4 andares - sem torre",
+          "options": {
+            "tamanho": "4 andares",
+            "suporte": "Sem torre"
+          },
+          "price": 240.0,
+          "minimumQuantity": null,
+          "quantity": "40 macarons",
+          "maxFlavors": 2,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 4 andares - com torre",
+          "options": {
+            "tamanho": "4 andares",
+            "suporte": "Com torre"
+          },
+          "price": 274.0,
+          "minimumQuantity": null,
+          "quantity": "40 macarons",
+          "maxFlavors": 2,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 5 andares - sem torre",
+          "options": {
+            "tamanho": "5 andares",
+            "suporte": "Sem torre"
+          },
+          "price": 360.0,
+          "minimumQuantity": null,
+          "quantity": "60 macarons",
+          "maxFlavors": 3,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 5 andares - com torre",
+          "options": {
+            "tamanho": "5 andares",
+            "suporte": "Com torre"
+          },
+          "price": 395.0,
+          "minimumQuantity": null,
+          "quantity": "60 macarons",
+          "maxFlavors": 3,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 6 andares - sem torre",
+          "options": {
+            "tamanho": "6 andares",
+            "suporte": "Sem torre"
+          },
+          "price": 480.0,
+          "minimumQuantity": null,
+          "quantity": "80 macarons",
+          "maxFlavors": 3,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 6 andares - com torre",
+          "options": {
+            "tamanho": "6 andares",
+            "suporte": "Com torre"
+          },
+          "price": 540.0,
+          "minimumQuantity": null,
+          "quantity": "80 macarons",
+          "maxFlavors": 3,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 7 andares - sem torre",
+          "options": {
+            "tamanho": "7 andares",
+            "suporte": "Sem torre"
+          },
+          "price": 600.0,
+          "minimumQuantity": null,
+          "quantity": "100 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 7 andares - com torre",
+          "options": {
+            "tamanho": "7 andares",
+            "suporte": "Com torre"
+          },
+          "price": 680.0,
+          "minimumQuantity": null,
+          "quantity": "100 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 8 andares - sem torre",
+          "options": {
+            "tamanho": "8 andares",
+            "suporte": "Sem torre"
+          },
+          "price": 780.0,
+          "minimumQuantity": null,
+          "quantity": "130 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 8 andares - com torre",
+          "options": {
+            "tamanho": "8 andares",
+            "suporte": "Com torre"
+          },
+          "price": 880.0,
+          "minimumQuantity": null,
+          "quantity": "130 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 10 andares - sem torre",
+          "options": {
+            "tamanho": "10 andares",
+            "suporte": "Sem torre"
+          },
+          "price": 1100.0,
+          "minimumQuantity": null,
+          "quantity": "200 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        },
+        {
+          "label": "Torre de macarons 10 andares - com torre",
+          "options": {
+            "tamanho": "10 andares",
+            "suporte": "Com torre"
+          },
+          "price": 1200.0,
+          "minimumQuantity": null,
+          "quantity": "200 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Consultar cores especiais"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pirulito-simples",
+      "category": "pirulitos",
+      "name": "Pirulito simples com laço",
+      "description": "Pirulito de suspiro simples, com laço.",
+      "price": 5.5,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": 10,
+      "quantity": "1 unidade",
+      "images": [],
+      "badge": "Simples",
+      "flavors": [],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": true,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "pirulito-modelado-simples",
+      "category": "pirulitos",
+      "name": "Pirulito modelado simples",
+      "description": "Pirulito de suspiro modelado. Temas sob consulta.",
+      "price": 6.0,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": 10,
+      "quantity": "1 unidade",
+      "images": [],
+      "badge": "Modelado",
+      "flavors": [],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [
+        "Arco-íris",
+        "Jardim encantado",
+        "Borboletas",
+        "Flores",
+        "Ursinhos",
+        "Safari",
+        "Fundo do mar",
+        "Patrulha Canina",
+        "Stitch",
+        "Casa da Gabby",
+        "Princesas",
+        "Minnie",
+        "Dinossauros"
+      ],
+      "customizable": true,
+      "notes": [
+        "Temas sob consulta"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "pirulito-modelado-premium",
+      "category": "pirulitos",
+      "name": "Pirulito modelado premium",
+      "description": "Pirulito modelado premium, com personagens. Tema sob consulta.",
+      "price": 7.5,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": 10,
+      "quantity": "1 unidade",
+      "images": [],
+      "badge": "Premium",
+      "flavors": [],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [
+        "Arco-íris",
+        "Jardim encantado",
+        "Borboletas",
+        "Flores",
+        "Ursinhos",
+        "Safari",
+        "Fundo do mar",
+        "Patrulha Canina",
+        "Stitch",
+        "Casa da Gabby",
+        "Princesas",
+        "Minnie",
+        "Dinossauros"
+      ],
+      "customizable": true,
+      "notes": [
+        "Personagens",
+        "Tema sob consulta"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "pirulito-brigadeiro",
+      "category": "pirulitos",
+      "name": "Pirulito recheado de brigadeiro",
+      "description": "Pirulito de suspiro recheado de brigadeiro.",
+      "price": 6.0,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": 10,
+      "quantity": "1 unidade",
+      "images": [],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": true,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "lembrancinha-mini-suspiros",
+      "category": "lembrancinhas",
+      "name": "Lembrancinha de mini suspiros",
+      "description": "Mini suspiros em saquinho (cores comuns ou fortes) ou em caixinha, com laço e tag.",
+      "price": null,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": true,
+      "notes": [
+        "Laço e tag"
+      ],
+      "featured": true,
+      "available": true,
+      "selectors": [
+        {
+          "key": "embalagem",
+          "label": "Embalagem"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Saquinho com 15 mini suspiros",
+          "options": {
+            "embalagem": "Saquinho"
+          },
+          "price": 5.0,
+          "minimumQuantity": 10,
+          "quantity": "15 mini suspiros",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Saquinho com 15 mini suspiros - cores fortes",
+          "options": {
+            "embalagem": "Saquinho – cores fortes"
+          },
+          "price": 5.5,
+          "minimumQuantity": 10,
+          "quantity": "15 mini suspiros",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Caixinha com mini suspiros",
+          "options": {
+            "embalagem": "Caixinha"
+          },
+          "price": 7.0,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "lembrancinha-rosa",
+      "category": "lembrancinhas",
+      "name": "Rosa recheada",
+      "description": "Rosa recheada de brigadeiro, no saquinho ou na caixinha.",
+      "price": null,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": true,
+      "notes": [
+        "Laço e tag"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [
+        {
+          "key": "embalagem",
+          "label": "Embalagem"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Rosa recheada no saquinho",
+          "options": {
+            "embalagem": "Saquinho"
+          },
+          "price": 5.5,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Rosa recheada na caixinha",
+          "options": {
+            "embalagem": "Caixinha"
+          },
+          "price": 7.0,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "lembrancinha-bonequinha",
+      "category": "lembrancinhas",
+      "name": "Bonequinha recheada",
+      "description": "Bonequinha recheada de brigadeiro, com tema e cor personalizáveis.",
+      "price": 5.5,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": 10,
+      "quantity": "1 unidade",
+      "images": [],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [
+        "Arco-íris",
+        "Jardim encantado",
+        "Borboletas",
+        "Flores",
+        "Ursinhos",
+        "Safari",
+        "Fundo do mar",
+        "Patrulha Canina",
+        "Stitch",
+        "Casa da Gabby",
+        "Princesas",
+        "Minnie",
+        "Dinossauros"
+      ],
+      "customizable": true,
+      "notes": [
+        "Tema e cor personalizáveis"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "lembrancinha-adicional",
+      "category": "lembrancinhas",
+      "name": "Adicional suspiro temático central",
+      "description": "Adicional por unidade, somado ao preço do saquinho.",
+      "price": 0.5,
+      "priceUnit": "por unidade adicional",
+      "unit": [
+        "adicional",
+        "adicionais"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": "Adicional por unidade",
+      "images": [],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [
+        "Arco-íris",
+        "Jardim encantado",
+        "Borboletas",
+        "Flores",
+        "Ursinhos",
+        "Safari",
+        "Fundo do mar",
+        "Patrulha Canina",
+        "Stitch",
+        "Casa da Gabby",
+        "Princesas",
+        "Minnie",
+        "Dinossauros"
+      ],
+      "customizable": true,
+      "notes": [
+        "Somar ao preço do saquinho"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "suspiro-modelado",
+      "category": "suspiros-modelados",
+      "name": "Suspiro modelado",
+      "description": "Suspiro modelado sem recheio ou recheado de brigadeiro. Tema sob consulta.",
+      "price": null,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [],
+      "badge": "Modelado",
+      "flavors": [],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [
+        "Arco-íris",
+        "Jardim encantado",
+        "Borboletas",
+        "Flores",
+        "Ursinhos",
+        "Safari",
+        "Fundo do mar",
+        "Patrulha Canina",
+        "Stitch",
+        "Casa da Gabby",
+        "Princesas",
+        "Minnie",
+        "Dinossauros"
+      ],
+      "customizable": true,
+      "notes": [
+        "Tema sob consulta"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [
+        {
+          "key": "opcao",
+          "label": "Opção"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Suspiro modelado sem recheio",
+          "options": {
+            "opcao": "Sem recheio"
+          },
+          "price": 7.5,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": [],
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Suspiro modelado recheado",
+          "options": {
+            "opcao": "Recheado"
+          },
+          "price": 8.0,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": [
+            "Brigadeiro"
+          ],
+          "themes": null,
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "suspiro-3d",
+      "category": "suspiros-modelados",
+      "name": "Suspiro 3D",
+      "description": "Suspiro 3D com recheio de Nutella ou brigadeiro, sem ou com caixinha. Tema sob consulta.",
+      "price": null,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [],
+      "badge": "3D",
+      "flavors": [
+        "Nutella",
+        "Brigadeiro"
+      ],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [
+        "Arco-íris",
+        "Jardim encantado",
+        "Borboletas",
+        "Flores",
+        "Ursinhos",
+        "Safari",
+        "Fundo do mar",
+        "Patrulha Canina",
+        "Stitch",
+        "Casa da Gabby",
+        "Princesas",
+        "Minnie",
+        "Dinossauros"
+      ],
+      "customizable": true,
+      "notes": [
+        "Tema sob consulta"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [
+        {
+          "key": "embalagem",
+          "label": "Embalagem"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Suspiro 3D sem caixinha",
+          "options": {
+            "embalagem": "Sem caixinha"
+          },
+          "price": 10.0,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Suspiro 3D com caixinha",
+          "options": {
+            "embalagem": "Com caixinha"
+          },
+          "price": 12.0,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "centro-de-mesa",
+      "category": "centros-de-mesa",
+      "name": "Centro de mesa com pirulitos",
+      "description": "Centro de mesa com pirulitos de roseta, modelados ou premium.",
+      "price": null,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [
+        "Arco-íris",
+        "Jardim encantado",
+        "Borboletas",
+        "Flores",
+        "Ursinhos",
+        "Safari",
+        "Fundo do mar",
+        "Patrulha Canina",
+        "Stitch",
+        "Casa da Gabby",
+        "Princesas",
+        "Minnie",
+        "Dinossauros"
+      ],
+      "customizable": true,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [
+        {
+          "key": "versao",
+          "label": "Versão"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Centro de mesa com pirulitos de roseta",
+          "options": {
+            "versao": "Roseta"
+          },
+          "price": 10.0,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": [],
+          "notes": []
+        },
+        {
+          "label": "Centro de mesa com pirulitos modelados",
+          "options": {
+            "versao": "Modelado"
+          },
+          "price": 12.0,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Centro de mesa com pirulitos premium",
+          "options": {
+            "versao": "Premium"
+          },
+          "price": 14.0,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "torre-de-suspiros",
+      "category": "torres-e-mini-suspiros",
+      "name": "Torre de suspiros",
+      "description": "Torre de suspiros nos tamanhos de 30 cm e 40 cm.",
+      "price": null,
+      "priceUnit": "por torre",
+      "unit": [
+        "torre",
+        "torres"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": true,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [
+        {
+          "key": "tamanho",
+          "label": "Tamanho"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Torre de suspiros 30 cm",
+          "options": {
+            "tamanho": "30 cm"
+          },
+          "price": 100.0,
+          "minimumQuantity": null,
+          "quantity": "30 cm",
+          "maxFlavors": null,
+          "maxColors": 2,
+          "flavors": null,
+          "themes": null,
+          "notes": [
+            "Até 2 cores"
+          ]
+        },
+        {
+          "label": "Torre de suspiros 40 cm",
+          "options": {
+            "tamanho": "40 cm"
+          },
+          "price": 150.0,
+          "minimumQuantity": null,
+          "quantity": "40 cm",
+          "maxFlavors": null,
+          "maxColors": "free",
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "mini-suspiros",
+      "category": "torres-e-mini-suspiros",
+      "name": "Mini suspiros",
+      "description": "Mini suspiros vendidos por peso, em pacotes de 250 g (cerca de 100 unidades).",
+      "price": 45.0,
+      "priceUnit": "por pacote de 250 g",
+      "unit": [
+        "pacote de 250 g",
+        "pacotes de 250 g"
+      ],
+      "gramsPerUnit": 250,
+      "minimumQuantity": 2,
+      "quantity": "250 g (~100 unidades)",
+      "images": [],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [
+        "Pedido mínimo equivale a 2 pacotes"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "brownie",
+      "category": "brownies",
+      "name": "Brownie recheado",
+      "description": "Brownie de 4 cm ou 5 cm, com ou sem laço, recheado de brigadeiro ou doce de leite.",
+      "price": null,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro",
+        "Doce de leite"
+      ],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": true,
+      "available": true,
+      "selectors": [
+        {
+          "key": "tamanho",
+          "label": "Tamanho"
+        },
+        {
+          "key": "laco",
+          "label": "Laço"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Brownie 4 cm sem laço",
+          "options": {
+            "tamanho": "4 cm",
+            "laco": "Sem laço"
+          },
+          "price": 5.0,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Brownie 4 cm com laço",
+          "options": {
+            "tamanho": "4 cm",
+            "laco": "Com laço"
+          },
+          "price": 5.3,
+          "minimumQuantity": 10,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Brownie 5 cm sem laço",
+          "options": {
+            "tamanho": "5 cm",
+            "laco": "Sem laço"
+          },
+          "price": 6.0,
+          "minimumQuantity": null,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Brownie 5 cm com laço",
+          "options": {
+            "tamanho": "5 cm",
+            "laco": "Com laço"
+          },
+          "price": 6.3,
+          "minimumQuantity": null,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "bem-casado",
+      "category": "bem-casados",
+      "name": "Bem-casado / bem-vivido",
+      "description": "Recheado de doce de leite, com cobertura de açúcar, com ou sem laço.",
+      "price": null,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [],
+      "badge": null,
+      "flavors": [
+        "Doce de leite"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [
+        "Cobertura de açúcar"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [
+        {
+          "key": "laco",
+          "label": "Laço"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Bem-casado / bem-vivido sem laço",
+          "options": {
+            "laco": "Sem laço"
+          },
+          "price": 5.5,
+          "minimumQuantity": 15,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Bem-casado / bem-vivido com laço",
+          "options": {
+            "laco": "Com laço"
+          },
+          "price": 6.0,
+          "minimumQuantity": 15,
+          "quantity": "1 unidade",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        }
+      ]
+    }
+  ]
+}
