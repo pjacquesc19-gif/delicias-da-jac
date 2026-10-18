@@ -142,7 +142,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": 20,
       "quantity": "1 unidade",
-      "images": [],
+      "images": [
+        "macaron-individual.png"
+      ],
       "badge": null,
       "flavors": [
         "Brigadeiro",
@@ -195,7 +197,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": null,
-      "images": [],
+      "images": [
+        "macaron-caixinha.png"
+      ],
       "badge": null,
       "flavors": [
         "Brigadeiro",
@@ -296,7 +300,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": null,
-      "images": [],
+      "images": [
+        "macaron-torre.png"
+      ],
       "badge": null,
       "flavors": [
         "Brigadeiro",
@@ -562,7 +568,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": 10,
       "quantity": "1 unidade",
-      "images": [],
+      "images": [
+        "pirulito-simples.png"
+      ],
       "badge": "Simples",
       "flavors": [],
       "flavorChoice": "many",
@@ -603,7 +611,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": 10,
       "quantity": "1 unidade",
-      "images": [],
+      "images": [
+        "pirulito-modelado-simples.png"
+      ],
       "badge": "Modelado",
       "flavors": [],
       "flavorChoice": "many",
@@ -660,7 +670,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": 10,
       "quantity": "1 unidade",
-      "images": [],
+      "images": [
+        "pirulito-modelado-premium.png"
+      ],
       "badge": "Premium",
       "flavors": [],
       "flavorChoice": "many",
@@ -718,7 +730,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": 10,
       "quantity": "1 unidade",
-      "images": [],
+      "images": [
+        "pirulito-brigadeiro.png"
+      ],
       "badge": null,
       "flavors": [
         "Brigadeiro"
@@ -761,7 +775,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": null,
-      "images": [],
+      "images": [
+        "lembrancinha-mini-suspiros.png"
+      ],
       "badge": null,
       "flavors": [],
       "flavorChoice": "many",
@@ -852,7 +868,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": null,
-      "images": [],
+      "images": [
+        "lembrancinha-rosa.png"
+      ],
       "badge": null,
       "flavors": [
         "Brigadeiro"
@@ -931,7 +949,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": 10,
       "quantity": "1 unidade",
-      "images": [],
+      "images": [
+        "lembrancinha-bonequinha.png"
+      ],
       "badge": null,
       "flavors": [
         "Brigadeiro"
@@ -990,7 +1010,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": "Adicional por unidade",
-      "images": [],
+      "images": [
+        "lembrancinha-adicional.png"
+      ],
       "badge": null,
       "flavors": [],
       "flavorChoice": "many",
@@ -1035,7 +1057,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": null,
-      "images": [],
+      "images": [
+        "suspiro-modelado.png"
+      ],
       "badge": "Modelado",
       "flavors": [],
       "flavorChoice": "many",
@@ -1128,7 +1152,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": null,
-      "images": [],
+      "images": [
+        "suspiro-3d.png"
+      ],
       "badge": "3D",
       "flavors": [
         "Nutella",
@@ -1222,7 +1248,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": null,
-      "images": [],
+      "images": [
+        "centro-de-mesa.png"
+      ],
       "badge": null,
       "flavors": [],
       "flavorChoice": "many",
@@ -1325,7 +1353,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": null,
-      "images": [],
+      "images": [
+        "torre-de-suspiros.png"
+      ],
       "badge": null,
       "flavors": [],
       "flavorChoice": "many",
@@ -1402,7 +1432,9 @@
       "gramsPerUnit": 250,
       "minimumQuantity": 2,
       "quantity": "250 g (~100 unidades)",
-      "images": [],
+      "images": [
+        "mini-suspiros.png"
+      ],
       "badge": null,
       "flavors": [],
       "flavorChoice": "many",
@@ -1433,7 +1465,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": null,
-      "images": [],
+      "images": [
+        "brownie.png"
+      ],
       "badge": null,
       "flavors": [
         "Brigadeiro",
@@ -1535,7 +1569,9 @@
       "gramsPerUnit": null,
       "minimumQuantity": null,
       "quantity": null,
-      "images": [],
+      "images": [
+        "bem-casado.png"
+      ],
       "badge": null,
       "flavors": [
         "Doce de leite"
