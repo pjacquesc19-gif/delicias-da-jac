@@ -126,17 +126,17 @@ input[type="color"]{padding:.2rem;width:3.2rem;height:44px;cursor:pointer}
 dialog{border:0;padding:0;color:var(--ameixa);background:var(--creme);max-width:none;max-height:none}
 dialog::backdrop{background:rgba(88,45,80,.55)}
 .modal{width:min(680px,94vw);max-height:min(90dvh,880px);border-radius:var(--raio);box-shadow:0 20px 60px rgba(88,45,80,.35)}
-.modal[open]{display:flex;flex-direction:column;animation:rise .2s ease}
-.drawer{width:min(440px,100%);height:100dvh;margin:0 0 0 auto;border-radius:0}
-.drawer[open]{display:flex;flex-direction:column;animation:slide-in .25s ease}
+.modal[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;animation:rise .2s ease}
+.drawer{position:fixed;inset:0 0 0 auto;width:min(440px,100%);height:100%;margin:0;border-radius:0}
+.drawer[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;animation:slide-in .25s ease}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes slide-in{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
 .modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1.1rem;background:#fff;border-bottom:1px solid var(--linha)}
 .modal-head h2{font-size:1.3rem}
 .close{background:none;border:0;font-size:2rem;line-height:1;cursor:pointer;color:inherit;width:44px;height:44px;border-radius:50%}
 .close:hover{background:var(--bebe)}
-.modal-body,.drawer-body{overflow:auto;padding:1rem 1.1rem 1.2rem;flex:1;overscroll-behavior:contain}
-.modal-foot{border-top:1px solid var(--linha);padding:.8rem 1.1rem 1rem;background:#fff;display:grid;gap:.5rem}
+.modal-body,.drawer-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1rem 1.1rem 1.2rem;min-height:0;overscroll-behavior:contain;touch-action:pan-y}
+.modal-foot{border-top:1px solid var(--linha);padding:.8rem 1.1rem calc(1rem + env(safe-area-inset-bottom));background:#fff;display:grid;gap:.5rem}
 .m-total{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:1.05rem}
 .m-total strong{font-family:var(--titulo);font-size:1.6rem;color:var(--lilas)}
 .m-actions{display:grid;grid-template-columns:1fr 2fr;gap:.6rem}
@@ -232,7 +232,7 @@ dialog::backdrop{background:rgba(88,45,80,.55)}
   .bar{gap:.6rem}
 }
 @media(max-width:640px){
-  .modal{width:100%;margin:auto 0 0;border-radius:20px 20px 0 0;max-height:94dvh}
+  .modal{position:fixed;inset:.6rem 0 0 0;width:100%;height:auto;max-height:none;margin:0;border-radius:20px 20px 0 0}
   .modal[open]{animation:sheet .25s ease}
   .m-prod{grid-template-columns:96px 1fr;gap:.8rem}
   .m-info h3{font-size:1.2rem}
