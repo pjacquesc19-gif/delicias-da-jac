@@ -606,8 +606,12 @@
       ${t.consultIdx.length ? `<p class="c-note warn">Este valor não inclui ${t.consultIdx.length === 1 ? 'o item' : 'os itens'} ${t.consultIdx.join(', ')}, com preço sob consulta. O total depende da confirmação da confeitaria.</p>` : ''}
       <details class="c-notes"${cart.note ? ' open' : ''}><summary>Observações do pedido (opcional)</summary>
         <textarea id="c-note" rows="2" maxlength="400" aria-label="Observações do pedido" placeholder="Data do evento, horário de retirada, dúvidas…">${esc(cart.note)}</textarea></details>
-      <p class="c-legal">Enviar o pedido não o confirma. A reserva só vale após o atendimento e o pagamento de 50%.</p>
-      <button type="button" class="btn wa" data-cact="finish">Finalizar pedido pelo WhatsApp</button>
+      <p class="c-legal">${ordersOnline()
+        ? 'Enviar a solicitação não confirma a encomenda: a confeitaria confere a disponibilidade da data e responde. A reserva só vale após o pagamento de 50%.'
+        : 'Enviar o pedido não o confirma. A reserva só vale após o atendimento e o pagamento de 50%.'}</p>
+      ${ordersOnline()
+        ? '<button type="button" class="btn wa" data-cact="checkout">Finalizar encomenda</button>'
+        : '<button type="button" class="btn wa" data-cact="finish">Finalizar pedido pelo WhatsApp</button>'}
       <div class="c-row"><button type="button" class="btn ghost" data-close>Continuar comprando</button><button type="button" class="link danger" data-cact="clear">Esvaziar carrinho</button></div>`;
   }
 
@@ -653,6 +657,8 @@
       openProduct(p.id, 0, it, true);
     } else if (a === 'clear') {
       if (window.confirm('Esvaziar o carrinho?')) { cart = { items: [], note: '' }; saveCart(); renderCart(); }
+    } else if (a === 'checkout') {
+      openCheckout();
     } else if (a === 'finish') {
       // Sem a opção 'noopener' (ela faz window.open devolver sempre null); o opener é zerado à mão.
       const link = waLink(whatsappMessage()), w = window.open(link, '_blank');
@@ -665,6 +671,297 @@
       const g = PRODUCTS[it.pid].gramsPerUnit || 1, raw = Number(String(e.target.value).replace(',', '.'));
       setCartQty(id, Number.isFinite(raw) ? raw / g : NaN);
     }
+  }
+
+  /* =====================================================================
+     Finalizar encomenda: formulário + envio ao Apps Script (Google Sheets)
+     ---------------------------------------------------------------------
+     O site só mostra "Pedido recebido" quando a resposta é um JSON com
+     { ok: true, orderId }. Nada de 'no-cors': a resposta precisa ser legível.
+     O envio usa Content-Type text/plain (requisição "simples": sem preflight de CORS).
+     ===================================================================== */
+  const kdlg = $('#checkout-dialog');
+  const TZ = 'America/Sao_Paulo';
+  const PICKUP = { first: 9 * 60, last: 20 * 60, step: 30 };
+  const DEPOSIT_PERCENT = 50;
+  const REQ_KEY = 'delicias-da-jac:solicitacao:v1';
+  const SEND_TIMEOUT_MS = 30000;
+  const MIN_FILL_MS = 3500; // o servidor exige >= 3000 ms
+  const WEEKDAYS = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+  const NAME_RE = /^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ'’ .-]+$/;
+  const EMAIL_RE = /^[^\s@<>(),;:"]+@[^\s@<>(),;:"]+\.[^\s@<>(),;:"]{2,}$/;
+  const FIELDS = ['nome', 'whatsapp', 'email', 'data', 'horario'];
+
+  let ck = null; // { openedAt, sending, done, v: {nome, whatsapp, email, data, horario, obs} }
+  const ckValues = { nome: '', whatsapp: '', email: '', data: '', horario: '', obs: '' }; // sobrevive a fechar/abrir (só em memória)
+
+  const ordersEndpoint = () => (DATA && DATA.meta && DATA.meta.ordersEndpoint) || '';
+  function ordersOnline() { return !!ordersEndpoint(); }
+
+  const todaySP = () => new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(new Date()); // AAAA-MM-DD
+  const nowMinutesSP = () => {
+    const [h, m] = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date()).split(':').map(Number);
+    return h * 60 + m;
+  };
+  const isoOk = (iso) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); if (!m) return null; const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])); return d.getUTCFullYear() === +m[1] && d.getUTCMonth() === +m[2] - 1 && d.getUTCDate() === +m[3] ? d : null; };
+  const addDays = (iso, n) => { const d = isoOk(iso); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+  const brDate = (iso) => iso.split('-').reverse().join('/');
+  const hhmm = (m) => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+  const round2 = (n) => Math.round(n * 100) / 100;
+  function slotList(date) {
+    const out = [];
+    for (let m = PICKUP.first; m <= PICKUP.last; m += PICKUP.step) if (date !== todaySP() || m > nowMinutesSP()) out.push(hhmm(m));
+    return out;
+  }
+  function normalizeWhats(v) {
+    let d = String(v || '').replace(/\D/g, '');
+    if ((d.length === 12 || d.length === 13) && d.startsWith('55')) d = d.slice(2);
+    if (d.length !== 10 && d.length !== 11) return '';
+    if (+d.slice(0, 2) < 11) return '';
+    if (d.length === 11 && d[2] !== '9') return '';
+    return '55' + d;
+  }
+
+  function validateCheckout(v) {
+    const e = {}, nome = v.nome.trim().replace(/\s+/g, ' ');
+    if (nome.length < 5 || nome.split(' ').filter((w) => w.length > 1).length < 2 || !NAME_RE.test(nome)) e.nome = 'Informe seu nome completo.';
+    if (!normalizeWhats(v.whatsapp)) e.whatsapp = 'Informe um WhatsApp válido, com DDD. Ex.: (21) 98765-4321.';
+    if (!EMAIL_RE.test(v.email.trim())) e.email = 'Informe um e-mail válido.';
+    const today = todaySP(), d = isoOk(v.data);
+    if (!d) e.data = 'Escolha a data desejada para a retirada.';
+    else if (v.data < today) e.data = 'A data não pode estar no passado.';
+    else if (v.data > addDays(today, 366)) e.data = 'Escolha uma data mais próxima.';
+    else if (d.getUTCDay() === 0) e.data = 'Não há atendimento aos domingos. Escolha outro dia.';
+    if (!v.horario) e.horario = 'Escolha o horário de retirada.';
+    else if (!slotList(v.data).includes(v.horario)) e.horario = v.data === today ? 'Esse horário de hoje já passou.' : 'Escolha um horário entre 9h e 20h.';
+    return e;
+  }
+
+  function orderTotals() {
+    const t = totals(), deposit = round2(t.sum * DEPOSIT_PERCENT / 100);
+    return { total: t.sum, deposit, balance: round2(t.sum - deposit), partial: t.consultIdx.length > 0, consultIdx: t.consultIdx, all: t.consultIdx.length === cart.items.length };
+  }
+
+  function summaryHTML() {
+    const t = orderTotals();
+    const rows = cart.items.map((it, i) => {
+      const r = priceOf(it), lines = itemLines(it);
+      return `<li><div class="k-it"><strong>${i + 1}. ${esc(it.vlabel)}</strong>
+        <span class="k-q">${esc(qtyText(r.p, it.qty))}${r.sub === null ? '' : ' · ' + brl(r.unit) + ' cada'}</span>
+        ${lines.length ? `<ul class="ci-opts">${lines.map(([k, val]) => `<li><span>${k}:</span> ${esc(val)}</li>`).join('')}</ul>` : ''}</div>
+        <div class="k-sub">${r.sub === null ? '<em>sob consulta</em>' : brl(r.sub)}</div></li>`;
+    }).join('');
+    return `<section class="k-sum" aria-label="Resumo da encomenda"><h3>Resumo da encomenda</h3>
+      <ul class="k-list">${rows}</ul>
+      <dl class="k-tot">
+        <div><dt>${t.partial ? 'Total parcial' : 'Total estimado'}</dt><dd>${t.all ? 'A combinar' : brl(t.total)}</dd></div>
+        <div><dt>Sinal de 50%</dt><dd>${t.all ? '—' : brl(t.deposit)}</dd></div>
+        <div><dt>Saldo restante (50%)</dt><dd>${t.all ? '—' : brl(t.balance)}</dd></div>
+      </dl>
+      ${t.partial ? `<p class="c-note warn">Este valor não inclui ${t.consultIdx.length === 1 ? 'o item' : 'os itens'} ${t.consultIdx.join(', ')}, com preço sob consulta. O valor final será confirmado pela confeitaria.</p>` : ''}
+    </section>`;
+  }
+
+  function openCheckout() {
+    // Garante que o carrinho ainda respeita os mínimos do catálogo atual.
+    const bad = cart.items.findIndex((it) => { const r = priceOf(it); return it.qty < minEff(r.p, r.c, it.colors.length); });
+    if (bad >= 0) { toast(`O item ${bad + 1} está abaixo do pedido mínimo. Ajuste no carrinho.`); return; }
+    if (!cart.items.length) return;
+    if (!ckValues.obs && cart.note) ckValues.obs = cart.note;
+    ck = { openedAt: Date.now(), sending: false, done: false, v: ckValues };
+    cdlg.close();
+    buildCheckout();
+    kdlg.showModal();
+  }
+
+  function buildCheckout(errors = {}, banner = '') {
+    const today = todaySP(), v = ck.v, slots = v.data && isoOk(v.data) ? slotList(v.data) : slotList('');
+    const opt = (list, cur) => '<option value="">Escolha o horário</option>' + list.map((h) => `<option value="${h}"${h === cur ? ' selected' : ''}>${h}</option>`).join('');
+    const err = (k) => `<small class="err-inline" id="k-e-${k}" role="alert">${esc(errors[k] || '')}</small>`;
+    const bad = (k) => (errors[k] ? ' aria-invalid="true"' : '');
+    $('#k-title').textContent = 'Finalizar encomenda';
+    $('#k-body').innerHTML = `
+      <form id="k-form" novalidate>
+        <div class="k-hp" aria-hidden="true"><label>Não preencha este campo<input type="text" id="k-website" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <fieldset class="fs k-first"><legend>Seus dados</legend>
+          <label class="f"><span>Nome completo</span><input id="k-nome" name="nome" autocomplete="name" maxlength="100" value="${esc(v.nome)}"${bad('nome')}>${err('nome')}</label>
+          <label class="f"><span>WhatsApp (com DDD)</span><input id="k-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(21) 98765-4321" value="${esc(v.whatsapp)}"${bad('whatsapp')}>${err('whatsapp')}</label>
+          <label class="f"><span>E-mail</span><input id="k-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="120" value="${esc(v.email)}"${bad('email')}>${err('email')}</label>
+        </fieldset>
+        <fieldset class="fs"><legend>Retirada</legend>
+          <p class="hint">Retiradas das 9h às 20h, de segunda a sábado. Não há atendimento aos domingos. <strong>A data solicitada depende de confirmação da confeitaria.</strong></p>
+          <div class="k-two">
+            <label class="f"><span>Data desejada</span><input id="k-data" name="data" type="date" min="${today}" max="${addDays(today, 366)}" value="${esc(v.data)}"${bad('data')}>${err('data')}</label>
+            <label class="f"><span>Horário desejado</span><select id="k-horario" name="horario"${bad('horario')}>${opt(slots, v.horario)}</select>${err('horario')}</label>
+          </div>
+        </fieldset>
+        <label class="f k-obs"><span>Observações adicionais (opcional)</span><textarea id="k-obs" name="obs" rows="3" maxlength="500" placeholder="Ex.: é para um aniversário, preciso de embalagem para presente…">${esc(v.obs)}</textarea></label>
+        ${summaryHTML()}
+        <p class="c-legal">Esta é uma <strong>solicitação</strong>: a encomenda só fica confirmada depois da análise da confeitaria e do pagamento do sinal de 50%. Usamos seus dados apenas para atender este pedido.</p>
+        <div class="m-err" id="k-banner" role="alert"${banner ? '' : ' hidden'}>${banner}</div>
+      </form>`;
+    $('#k-foot').innerHTML = `<div class="m-actions"><button type="button" class="btn ghost" data-kact="back">Voltar ao carrinho</button>
+      <button type="button" class="btn" id="k-submit">Enviar solicitação</button></div>`;
+  }
+
+  /* Identificador da solicitação: o mesmo conteúdo reenviado (ex.: queda de rede) reusa o ID e o servidor não duplica. */
+  const newRequestId = () => (window.crypto && crypto.randomUUID ? crypto.randomUUID() : uid() + uid() + uid());
+  function requestIdFor(sig) {
+    try { const s = JSON.parse(localStorage.getItem(REQ_KEY)); if (s && s.sig === sig && /^[A-Za-z0-9-]{16,64}$/.test(s.id)) return s.id; } catch { /* ignora */ }
+    const id = newRequestId();
+    try { localStorage.setItem(REQ_KEY, JSON.stringify({ id, sig })); } catch { /* ignora */ }
+    return id;
+  }
+  const clearRequestId = () => { try { localStorage.removeItem(REQ_KEY); } catch { /* ignora */ } };
+
+  function buildPayload() {
+    const v = ck.v;
+    const content = {
+      cliente: { nome: v.nome.trim().replace(/\s+/g, ' '), whatsapp: normalizeWhats(v.whatsapp), email: v.email.trim().toLowerCase() },
+      retirada: { data: v.data, horario: v.horario },
+      observacoes: v.obs.trim(),
+      itens: cart.items.map((it) => ({
+        pid: it.pid, vlabel: it.vlabel, qty: it.qty,
+        colors: it.colors.map((c) => ({ name: c.name, custom: !!c.custom, hex: c.hex || '' })),
+        theme: it.theme, themeCustom: !!it.themeCustom, flavors: [...it.flavors], note: it.note,
+      })),
+    };
+    const sig = JSON.stringify(content);
+    return { action: 'criarPedido', requestId: requestIdFor(sig), elapsedMs: Date.now() - ck.openedAt, website: ($('#k-website') || {}).value || '', totalCliente: orderTotals().total, ...content };
+  }
+
+  function setSending(on) {
+    ck.sending = on;
+    const b = $('#k-submit'); if (b) { b.disabled = on; b.textContent = on ? 'Enviando…' : 'Enviar solicitação'; }
+    $$('[data-kact="back"], #checkout-dialog .close', kdlg).forEach((x) => { x.disabled = on; });
+    $('#k-form') && $('#k-form').setAttribute('aria-busy', String(on));
+  }
+
+  function showErrors(errors, banner) {
+    buildCheckout(errors, banner);
+    const first = FIELDS.find((k) => errors[k]);
+    if (first) { const el = $('#k-' + (first === 'horario' ? 'horario' : first)); if (el) el.focus(); }
+    else { const b = $('#k-banner'); if (b && !b.hidden) b.scrollIntoView?.({ block: 'center' }); }
+  }
+
+  function bannerHTML(msg, withWhats) {
+    return `<strong>${esc(msg)}</strong>${withWhats ? '<br><button type="button" class="link" data-kact="whats">Prefiro enviar pelo WhatsApp</button>' : ''}`;
+  }
+
+  async function submitOrder() {
+    if (!ck || ck.sending || ck.done) return;
+    syncCheckoutValues();
+    const errors = validateCheckout(ck.v);
+    if (Object.keys(errors).length) return showErrors(errors, '');
+    setSending(true);
+    $('#k-banner').hidden = true;
+    // Anti-robô discreto: o servidor recusa formulários "enviados" em menos de 3 s depois de abertos.
+    // Para uma pessoa (ex.: com preenchimento automático) isso é invisível: o envio apenas espera o restante.
+    const wait = MIN_FILL_MS - (Date.now() - ck.openedAt);
+    if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+    const payload = buildPayload();
+    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), SEND_TIMEOUT_MS);
+    let data = null;
+    try {
+      const res = await fetch(ordersEndpoint(), {
+        method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload),
+        redirect: 'follow', credentials: 'omit', cache: 'no-store', signal: ctl.signal,
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      data = JSON.parse(await res.text()); // se o Google devolver uma página de erro, cai no catch
+      if (!data || typeof data !== 'object') throw new Error('resposta inválida');
+    } catch {
+      clearTimeout(timer); setSending(false);
+      // Resultado incerto: o pedido pode ou não ter sido salvo. Reenviar é seguro (mesmo ID de solicitação).
+      return showErrors({}, bannerHTML('Não conseguimos confirmar o envio. Seu pedido ainda NÃO foi confirmado como recebido. Verifique a conexão e toque em "Enviar solicitação" de novo (não será duplicado).', true));
+    }
+    clearTimeout(timer); setSending(false);
+    if (data.ok === true && typeof data.orderId === 'string' && /^DJ-\d{4,}$/.test(data.orderId)) return orderReceived(data, payload);
+    // Resposta do servidor com erro conhecido
+    const codeMsg = {
+      OCUPADO: 'O sistema está ocupado. Tente novamente em alguns segundos.',
+      INDISPONIVEL: 'Serviço temporariamente indisponível. Tente novamente em instantes ou envie pelo WhatsApp.',
+      ERRO_GRAVACAO: 'Não foi possível registrar agora. Tente novamente; seu pedido não será duplicado.',
+      ERRO_INTERNO: 'Não foi possível registrar agora. Tente novamente em instantes.',
+    };
+    if (data.code === 'DADOS_INVALIDOS' && data.erros) {
+      const mapped = {}; FIELDS.forEach((k) => { if (data.erros[k]) mapped[k] = String(data.erros[k]); });
+      return showErrors(mapped, bannerHTML('Confira os campos destacados.', false));
+    }
+    if (data.code === 'PRECO_ALTERADO') {
+      await refreshCatalog();
+      return showErrors({}, bannerHTML('Os preços do catálogo foram atualizados. Conferimos o resumo abaixo com os valores atuais: revise e envie novamente.', false));
+    }
+    const msg = codeMsg[data.code] || (typeof data.message === 'string' && data.message) || 'Não foi possível enviar a solicitação. Tente novamente ou fale conosco pelo WhatsApp.';
+    return showErrors({}, bannerHTML(msg, true));
+  }
+
+  function orderReceived(data, payload) {
+    ck.done = true;
+    clearRequestId();
+    const t = { total: Number(data.total) || 0, deposit: Number(data.deposit) || 0, balance: Number(data.balance) || 0, partial: !!data.partial };
+    const v = payload.retirada, wd = WEEKDAYS[isoOk(v.data).getUTCDay()];
+    cart = { items: [], note: '' }; ckValues.obs = ''; saveCart(); renderCart();
+    $('#k-title').textContent = 'Pedido recebido';
+    $('#k-body').innerHTML = `<div class="k-done">
+      <div class="k-check" aria-hidden="true">✓</div>
+      <h3>Pedido recebido — aguardando confirmação</h3>
+      <p class="k-id">Número do pedido <strong>${esc(data.orderId)}</strong></p>
+      ${data.duplicate ? '<p class="hint">Já tínhamos recebido esta solicitação, então não criamos um pedido repetido.</p>' : ''}
+      <p><strong>Ainda não é uma confirmação.</strong> A confeitaria vai analisar a disponibilidade para <strong>${esc(wd)}, ${esc(brDate(v.data))} às ${esc(v.horario)}</strong> e responder por e-mail ou WhatsApp. Guarde o número do pedido.</p>
+      <dl class="k-tot">
+        <div><dt>${t.partial ? 'Total parcial' : 'Total estimado'}</dt><dd>${brl(t.total)}</dd></div>
+        <div><dt>Sinal de 50% (após a aprovação)</dt><dd>${brl(t.deposit)}</dd></div>
+        <div><dt>Saldo restante (50%)</dt><dd>${brl(t.balance)}</dd></div>
+      </dl>
+      ${t.partial ? '<p class="c-note warn">Há itens com preço sob consulta; o valor final será confirmado pela confeitaria.</p>' : ''}
+      <p class="c-legal">Não enviamos instruções de pagamento agora: elas chegam somente depois que a confeitaria aprovar a data.</p>
+    </div>`;
+    $('#k-foot').innerHTML = `<div class="m-actions"><button type="button" class="btn ghost" data-kact="whats-done" data-id="${esc(data.orderId)}">Falar no WhatsApp</button>
+      <button type="button" class="btn" data-close>Voltar ao catálogo</button></div>`;
+    kdlg.scrollTop = 0; $('#k-body').scrollTop = 0;
+  }
+
+  function syncCheckoutValues() {
+    const g = (id) => { const el = $(id); return el ? el.value : ''; };
+    Object.assign(ck.v, { nome: g('#k-nome'), whatsapp: g('#k-whatsapp'), email: g('#k-email'), data: g('#k-data'), horario: g('#k-horario'), obs: g('#k-obs') });
+    cart.note = ck.v.obs; saveCart();
+  }
+
+  function onCheckoutClick(e) {
+    const t = e.target;
+    if (t === kdlg || t.closest('[data-close]')) { if (ck && ck.sending) return; return kdlg.close(); }
+    if (t.closest('#k-submit')) return submitOrder();
+    const act = t.closest('[data-kact]'); if (!act) return;
+    if (act.dataset.kact === 'back') { if (ck && ck.sending) return; syncCheckoutValues(); kdlg.close(); openCart(); }
+    else if (act.dataset.kact === 'whats') { syncCheckoutValues(); const link = waLink(whatsappMessage()), w = window.open(link, '_blank'); if (w) w.opener = null; else window.location.href = link; }
+    else if (act.dataset.kact === 'whats-done') {
+      const link = waLink(`Olá! Acabei de enviar a solicitação de encomenda ${act.dataset.id} pelo site da ${DATA.meta.brand}.`), w = window.open(link, '_blank');
+      if (w) w.opener = null; else window.location.href = link;
+    }
+  }
+  function onCheckoutInput(e) {
+    const id = e.target.id; if (!ck || ck.done || !id || !id.startsWith('k-')) return;
+    const key = id.slice(2);
+    if (FIELDS.includes(key)) { const m = $('#k-e-' + key); if (m) m.textContent = ''; e.target.removeAttribute('aria-invalid'); }
+    if (key === 'data') { // atualiza os horários possíveis (hoje: só os que ainda não passaram)
+      const sel = $('#k-horario'), cur = sel.value, list = isoOk(e.target.value) ? slotList(e.target.value) : slotList('');
+      sel.innerHTML = '<option value="">Escolha o horário</option>' + list.map((h) => `<option value="${h}"${h === cur ? ' selected' : ''}>${h}</option>`).join('');
+      const m = $('#k-e-data'); const d = isoOk(e.target.value);
+      if (d && d.getUTCDay() === 0) m.textContent = 'Não há atendimento aos domingos. Escolha outro dia.';
+    }
+    syncCheckoutValues();
+  }
+
+  // Recarrega o catálogo (usado quando o servidor avisa que os preços mudaram).
+  async function refreshCatalog() {
+    try {
+      const res = await fetch(DATA_URL, { cache: 'no-store' });
+      if (!res.ok) return;
+      applyData(await res.json());
+      renderCatalog(); renderCart();
+      if (ck && !ck.done) { const sec = $('.k-sum'); if (sec) sec.outerHTML = summaryHTML(); }
+    } catch { /* mantém o catálogo atual */ }
   }
 
   /* =====================================================================
@@ -731,6 +1028,13 @@
     dlg.addEventListener('input', onModalInput);
     dlg.addEventListener('close', () => { const back = draft && draft.fromCart; draft = null; if (back) openCart(); });
 
+    kdlg.addEventListener('click', onCheckoutClick);
+    kdlg.addEventListener('input', onCheckoutInput);
+    kdlg.addEventListener('change', onCheckoutInput);
+    kdlg.addEventListener('submit', (e) => { e.preventDefault(); submitOrder(); });
+    kdlg.addEventListener('cancel', (e) => { if (ck && ck.sending) e.preventDefault(); }); // Esc não fecha durante o envio
+    kdlg.addEventListener('close', () => { if (ck && ck.done) ck = null; });
+
     $('#open-cart').addEventListener('click', openCart);
     cdlg.addEventListener('click', (e) => {
       if (e.target === cdlg || e.target.closest('[data-close]')) return cdlg.close();
@@ -744,6 +1048,13 @@
     top.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
+  function applyData(json) {
+    DATA = json;
+    json.products.forEach((p) => { PRODUCTS[p.id] = p; });
+    json.colors.forEach((c) => { COLORS[c.name] = c; });
+    json.categories.forEach((c) => { CATEGORIES[c.id] = c; });
+  }
+
   async function init() {
     wireEvents();
     try {
@@ -754,9 +1065,7 @@
       $('#catalog').innerHTML = '<p class="status error">Não foi possível carregar o catálogo. Atualize a página. Se você abriu o arquivo direto do computador, rode um servidor local (veja o README).</p>';
       return;
     }
-    DATA.products.forEach((p) => { PRODUCTS[p.id] = p; });
-    DATA.colors.forEach((c) => { COLORS[c.name] = c; });
-    DATA.categories.forEach((c) => { CATEGORIES[c.id] = c; });
+    applyData(DATA);
     initBrand();
     const dropped = loadCart();
     renderNav(); renderCatalog(); renderCart();

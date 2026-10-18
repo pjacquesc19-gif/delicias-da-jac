@@ -24,11 +24,14 @@ data/catalogo.xlsx  →  scripts/xlsx_to_json.py (GitHub Actions)  →  data/pro
 ```
 index.html                       Estrutura da página
 style.css                        Identidade visual (cores em variáveis CSS, no :root)
-script.js                        Catálogo, modal de personalização, carrinho e WhatsApp
+script.js                        Catálogo, modal de personalização, carrinho, WhatsApp e formulário de encomenda
 data/catalogo.xlsx               FONTE OFICIAL dos dados (edite este arquivo)
 data/produtos.json               Gerado automaticamente a partir da planilha (não edite à mão)
 scripts/xlsx_to_json.py          Conversor + validação
 scripts/test_conversor.py        Testes do conversor
+scripts/build_apps_script.py     Gera apps-script/DeliciasDaJac.gs (arquivo único) a partir de apps-script/src
+apps-script/                     Backend das encomendas (Google Apps Script) e seus testes
+docs/ENCOMENDAS.md               Instalação, uso, testes e manutenção do sistema de encomendas
 requirements.txt                 Dependência do conversor (openpyxl)
 .github/workflows/atualizar-catalogo.yml   Converte a planilha quando ela muda
 public/images/produtos/          Fotos dos produtos
@@ -95,7 +98,7 @@ python3 -m http.server 8000      # na pasta do projeto
 pip install -r requirements.txt
 python scripts/xlsx_to_json.py          # gera data/produtos.json
 python scripts/xlsx_to_json.py --check  # só confere se o JSON está em dia
-python scripts/test_conversor.py        # 19 testes (migração, preços, mínimos, imagens, erros)
+python scripts/test_conversor.py        # 21 testes (migração, preços, mínimos, imagens, erros)
 ```
 
 **Roteiro manual rápido**
@@ -107,6 +110,15 @@ python scripts/test_conversor.py        # 19 testes (migração, preços, mínim
 5. Torre de macarons 4 andares: só 2 sabores. Torre de suspiros 30 cm: só 2 cores.
 6. Mini suspiros: mínimo 500 g; 600 g é recusado.
 7. Atualize a página: o carrinho continua. Clique em **Finalizar pedido pelo WhatsApp**.
+
+## Sistema de encomendas (Fase 1)
+
+O carrinho tem o botão **Finalizar encomenda** (formulário → planilha Google privada via Apps Script). Ele só aparece quando o campo "Sistema de encomendas (URL do Apps Script)" do Excel está preenchido; vazio, o site mantém o botão antigo de WhatsApp. Instalação, uso e testes: **[docs/ENCOMENDAS.md](docs/ENCOMENDAS.md)**.
+
+```bash
+node --test apps-script/test/backend.test.js    # 32 testes do backend (simulados)
+python scripts/build_apps_script.py --check     # confere se o arquivo único está em dia
+```
 
 ## Publicação no GitHub Pages
 

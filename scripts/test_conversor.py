@@ -160,6 +160,28 @@ class Conversor(unittest.TestCase):
         data = json.loads((self.tmp / 'saida.json').read_text(encoding='utf-8'))
         self.assertEqual(data['products'][0]['images'], ['macaron-rosa.jpg', 'macaron-azul.WEBP'])
 
+    def _set_endpoint(self, value):
+        def f(wb):
+            ws = wb['Informações gerais']
+            for row in ws.iter_rows(min_row=2):
+                if str(row[0].value).startswith('Sistema de encomendas'):
+                    row[1].value = value
+        return f
+
+    def test_endereco_do_sistema_de_encomendas(self):
+        # vazio (padrão): o site usa o WhatsApp
+        data = json.loads(JSON_PATH.read_text(encoding='utf-8'))
+        self.assertIsNone(data['meta']['ordersEndpoint'])
+        ok = 'https://script.google.com/macros/s/AKfycbxEXEMPLO-id_123/exec'
+        res = run(xlsx=self.mutate(self._set_endpoint(ok)), out=self.tmp / 'saida.json')
+        self.assertEqual(res.returncode, 0, res.stdout)
+        self.assertEqual(json.loads((self.tmp / 'saida.json').read_text(encoding='utf-8'))['meta']['ordersEndpoint'], ok)
+
+    def test_endereco_de_encomendas_invalido_e_recusado(self):
+        for bad in ('http://script.google.com/macros/s/abc/exec', 'https://evil.example/macros/s/abc/exec',
+                    'https://script.google.com/macros/s/abc/dev', 'javascript:alert(1)', 'script.google.com'):
+            self.expect_error(self._set_endpoint(bad), 'endereço do sistema de encomendas inválido')
+
     def test_categoria_inexistente(self):
         self.expect_error(lambda wb: setattr(wb['Produtos'].cell(2, 2), 'value', 'Salgados'), 'não existe na aba Categorias')
 

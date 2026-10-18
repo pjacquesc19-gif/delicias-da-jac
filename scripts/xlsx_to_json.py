@@ -227,7 +227,12 @@ def convert(xlsx_path, images_dir):
     for fname in (logo, owner_photo):
         if fname:
             valid_image(fname, 'Informações gerais', brand=True)
+    endpoint = info.get('sistema de encomendas (url do apps script)', '').strip()
+    if endpoint and not re.fullmatch(r'https://script\.google\.com/macros/s/[A-Za-z0-9_-]+/exec', endpoint):
+        err('Informações gerais', 'endereço do sistema de encomendas inválido: use o endereço do aplicativo web '
+            '(https://script.google.com/macros/s/.../exec) ou deixe vazio.')
     meta = {
+        'ordersEndpoint': endpoint or None,
         'brand': info.get('marca', ''), 'whatsapp': whatsapp, 'whatsappLabel': info.get('contato', ''),
         'instagram': info.get('instagram', '').lstrip('@'), 'owner': info.get('proprietaria', ''),
         'logo': logo or None, 'ownerPhoto': owner_photo or None, 'about': about,
