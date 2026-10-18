@@ -135,7 +135,8 @@ dialog::backdrop{background:rgba(88,45,80,.55)}
 .modal-head h2{font-size:1.3rem}
 .close{background:none;border:0;font-size:2rem;line-height:1;cursor:pointer;color:inherit;width:44px;height:44px;border-radius:50%}
 .close:hover{background:var(--bebe)}
-.modal-body,.drawer-body{overflow:auto;padding:1rem 1.1rem 1.2rem;flex:1;overscroll-behavior:contain}
+.modal-body,.drawer-body{overflow:auto;-webkit-overflow-scrolling:touch;padding:1rem 1.1rem 1.2rem;flex:1 1 auto;min-height:0;overscroll-behavior:contain}
+.modal-head,.modal-foot{flex:none}
 .modal-foot{border-top:1px solid var(--linha);padding:.8rem 1.1rem 1rem;background:#fff;display:grid;gap:.5rem}
 .m-total{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:1.05rem}
 .m-total strong{font-family:var(--titulo);font-size:1.6rem;color:var(--lilas)}
@@ -232,7 +233,7 @@ dialog::backdrop{background:rgba(88,45,80,.55)}
   .bar{gap:.6rem}
 }
 @media(max-width:640px){
-  .modal{width:100%;margin:auto 0 0;border-radius:20px 20px 0 0;max-height:94dvh}
+  .modal{width:100%;margin:auto 0 0;border-radius:20px 20px 0 0;max-height:94vh;max-height:94dvh}
   .modal[open]{animation:sheet .25s ease}
   .m-prod{grid-template-columns:96px 1fr;gap:.8rem}
   .m-info h3{font-size:1.2rem}
