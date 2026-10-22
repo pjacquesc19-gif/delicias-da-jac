@@ -1005,11 +1005,30 @@
     } else $('#historia').hidden = true;
   }
 
+  /**
+   * Leva ao início do catálogo: a barra de categorias (#catalogo) fica colada no topo da tela e os
+   * produtos começam logo abaixo dela. Calculado na hora porque o conteúdo acima ("Conheça…") só
+   * aparece depois que o catálogo carrega.
+   */
+  function goToCatalog(smooth) {
+    const nav = $('#catalogo'), next = nav && nav.nextElementSibling;
+    if (!next) return;
+    const top = next.getBoundingClientRect().top + window.scrollY - nav.offsetHeight;
+    const calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // 'instant' ignora o scroll-behavior:smooth do CSS (ao abrir o site o salto é direto).
+    window.scrollTo({ top: Math.max(0, Math.round(top)), behavior: smooth && !calm ? 'smooth' : 'instant' });
+  }
+
   function wireEvents() {
     $('#catnav').addEventListener('click', (e) => {
       const b = e.target.closest('[data-cat]'); if (!b) return;
       state.cat = b.dataset.cat; renderNav(); renderCatalog();
-      $('#catalogo').scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+      goToCatalog(true);
+    });
+    // Links "Catálogo" / "Ver catálogo": rolagem exata (sem guardar #catalogo no endereço, para o site reabrir no topo).
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href="#catalogo"]'); if (!a) return;
+      e.preventDefault(); goToCatalog(true);
     });
     $('#search').addEventListener('input', (e) => { state.q = e.target.value; renderCatalog(); });
     $('#sort').addEventListener('change', (e) => { state.sort = e.target.value; renderCatalog(); });
@@ -1056,6 +1075,8 @@
   }
 
   async function init() {
+    // O navegador não volta sozinho para a posição antiga: o site abre no topo (ou na seção do link).
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     wireEvents();
     try {
       const res = await fetch(DATA_URL, { cache: 'no-cache' });
@@ -1069,6 +1090,19 @@
     initBrand();
     const dropped = loadCart();
     renderNav(); renderCatalog(); renderCart();
+    // Com o conteúdo já montado: link com #catalogo (ou outra seção) vai ao lugar certo; sem link, topo.
+    const anchorOnOpen = () => {
+      if (location.hash === '#catalogo') goToCatalog(false);
+      else if (location.hash.length > 1 && document.getElementById(location.hash.slice(1))) document.getElementById(location.hash.slice(1)).scrollIntoView({ behavior: 'instant' });
+      else window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+    anchorOnOpen();
+    // A foto do "Conheça…" carrega depois e empurra o conteúdo: reajusta uma vez, se a pessoa ainda não rolou.
+    if (location.hash.length > 1) {
+      let moved = false; const mark = () => { moved = true; };
+      ['wheel', 'touchmove', 'keydown'].forEach((t) => window.addEventListener(t, mark, { once: true, passive: true }));
+      $('#story-img').addEventListener('load', () => { if (!moved) setTimeout(anchorOnOpen, 0); }, { once: true });
+    }
     if (dropped) toast(`${dropped} ${plural(dropped, 'item saiu', 'itens saíram')} do carrinho por não estar${dropped === 1 ? '' : 'em'} mais disponível${dropped === 1 ? '' : 'is'} no catálogo.`);
     // Se um item do carrinho mudou de preço, o carrinho já mostra o valor atual: nada é guardado no localStorage além das escolhas.
   }
