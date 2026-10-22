@@ -13,7 +13,7 @@
       "Nesse caminho, já atendeu mais de 2.000 festas, preparando cada encomenda de forma artesanal.",
       "Nossa missão é oferecer atendimento de excelência e encantar os convidados por meio de doces artesanais."
     ],
-    "versao": "2026-10-22.1"
+    "versao": "2026-10-22.2"
   },
   "categories": [
     {
@@ -145,6 +145,7 @@
       "minimumQuantity": 20,
       "quantity": "1 unidade",
       "images": [
+        "macaron-individual-4052c2a209.webp",
         "macaron-individual.png"
       ],
       "badge": null,
