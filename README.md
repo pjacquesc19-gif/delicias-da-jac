@@ -154,3 +154,4 @@ Estas regras vieram do catálogo; onde o catálogo não diz nada, a escolha foi 
 - **Temas:** a lista é sugestão de interface, não garantia de disponibilidade. "Outros" avisa que depende de confirmação.
 - **Mini suspiros:** vendidos em pacotes de 250 g; o cliente informa o total em gramas (múltiplos de 250, mínimo 500 g).
 - O catálogo trata como cores sob consulta: **neon, dourado e prateado**. Dourado e prateado são amostras marcadas "sob consulta"; "neon" é detectado quando digitado em "Outro".
+- 
