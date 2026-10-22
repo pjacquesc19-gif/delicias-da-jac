@@ -5,11 +5,6 @@ name: Atualizar catálogo (planilha para JSON)
 # então ele nunca dispara a si mesmo. Commits feitos com o GITHUB_TOKEN também
 # não disparam novos workflows, e a mensagem leva [skip ci] por garantia.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'data/catalogo.xlsx'
-      - 'scripts/xlsx_to_json.py'
   workflow_dispatch:   # permite rodar manualmente pela aba Actions
 
 permissions:
