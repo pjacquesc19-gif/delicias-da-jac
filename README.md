@@ -1,7 +1,7 @@
 # Delícias da Jac – Catálogo digital 2026
 
 Site estático em **HTML, CSS e JavaScript puro** (sem backend, sem build, sem dependências no navegador), pronto para o **GitHub Pages**.
-
+ 
 Os produtos ficam numa **planilha Excel**; um script converte a planilha em JSON e o site lê esse JSON:
 
 ```
