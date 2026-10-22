@@ -13,7 +13,7 @@
       "Nesse caminho, já atendeu mais de 2.000 festas, preparando cada encomenda de forma artesanal.",
       "Nossa missão é oferecer atendimento de excelência e encantar os convidados por meio de doces artesanais."
     ],
-    "versao": "2026-10-22.4"
+    "versao": "2026-10-22.5"
   },
   "categories": [
     {
@@ -131,163 +131,42 @@
   ],
   "products": [
     {
-      "id": "macaron-individual",
+      "id": "lombriga-moribunda",
       "category": "macarons",
-      "name": "Macaron individual",
-      "description": "Macaron com sabores à escolha. Mínimo de 20 unidades da mesma cor.",
-      "price": 60,
-      "priceUnit": "por unidade",
+      "name": "Lombriga Moribunda",
+      "description": "O melhor que a cidade de Ratanambá pode oferecer",
+      "price": 100000,
+      "priceUnit": "por grama",
       "unit": [
-        "macaron",
-        "macarons"
+        "unidade",
+        "unidades"
       ],
-      "gramsPerUnit": null,
-      "minimumQuantity": 20,
-      "quantity": "1 unidade",
+      "gramsPerUnit": 1000,
+      "minimumQuantity": null,
+      "quantity": "1 parsec",
       "images": [
-        "macaron-individual-4052c2a209.webp",
-        "macaron-individual.png"
+        "lombriga-moribunda-eeae0ed80b.webp",
+        "lombriga-moribunda-010bae9afd.webp"
       ],
-      "badge": null,
+      "badge": "Preferido das clientes",
       "flavors": [
-        "Brigadeiro",
-        "Brigadeiro branco",
-        "Limão-siciliano",
-        "Maracujá",
-        "Caramelo",
-        "Ninho com Nutella",
-        "Pistache",
-        "Nozes"
+        "Sangue",
+        "Bala Fini",
+        "Asteroide"
       ],
-      "flavorChoice": "many",
-      "minPerColor": 20,
+      "flavorChoice": "one",
+      "minPerColor": null,
       "colors": [
-        "Rosa",
-        "Azul",
-        "Verde",
-        "Amarelo",
-        "Lilás",
-        "Vermelho",
-        "Branco",
-        "Laranja",
-        "Preto",
-        "Dourado",
-        "Prateado"
+        "Preto"
       ],
-      "maxColors": "free",
+      "maxColors": 1,
       "themes": [],
       "customizable": true,
-      "notes": [
-        "Mínimo 20 da mesma cor",
-        "Cores especiais (neon, dourado e prateado): preço sob consulta"
-      ],
+      "notes": [],
       "featured": true,
       "available": true,
       "selectors": [],
       "variants": []
-    },
-    {
-      "id": "macaron-caixinha",
-      "category": "macarons",
-      "name": "Caixinha presenteável de macarons",
-      "description": "Caixinha com 1, 2 ou 3 macarons, com fita e tag.",
-      "price": null,
-      "priceUnit": "por caixinha",
-      "unit": [
-        "caixinha",
-        "caixinhas"
-      ],
-      "gramsPerUnit": null,
-      "minimumQuantity": null,
-      "quantity": null,
-      "images": [
-        "macaron-caixinha.png"
-      ],
-      "badge": null,
-      "flavors": [
-        "Brigadeiro",
-        "Brigadeiro branco",
-        "Limão-siciliano",
-        "Maracujá",
-        "Caramelo",
-        "Ninho com Nutella",
-        "Pistache",
-        "Nozes"
-      ],
-      "flavorChoice": "many",
-      "minPerColor": null,
-      "colors": [
-        "Rosa",
-        "Azul",
-        "Verde",
-        "Amarelo",
-        "Lilás",
-        "Vermelho",
-        "Branco",
-        "Laranja",
-        "Preto",
-        "Dourado",
-        "Prateado"
-      ],
-      "maxColors": "free",
-      "themes": [],
-      "customizable": true,
-      "notes": [
-        "Fita e tag",
-        "Cores especiais (neon, dourado e prateado): preço sob consulta"
-      ],
-      "featured": false,
-      "available": true,
-      "selectors": [
-        {
-          "key": "macarons-na-caixinha",
-          "label": "Macarons na caixinha"
-        }
-      ],
-      "variants": [
-        {
-          "label": "Caixinha com 1 macaron",
-          "options": {
-            "macarons-na-caixinha": "1 macaron"
-          },
-          "price": 8,
-          "minimumQuantity": null,
-          "quantity": "1 macaron",
-          "maxFlavors": null,
-          "maxColors": null,
-          "flavors": null,
-          "themes": null,
-          "notes": []
-        },
-        {
-          "label": "Caixinha com 2 macarons",
-          "options": {
-            "macarons-na-caixinha": "2 macarons"
-          },
-          "price": 15,
-          "minimumQuantity": null,
-          "quantity": "2 macarons",
-          "maxFlavors": null,
-          "maxColors": null,
-          "flavors": null,
-          "themes": null,
-          "notes": []
-        },
-        {
-          "label": "Caixinha com 3 macarons",
-          "options": {
-            "macarons-na-caixinha": "3 macarons"
-          },
-          "price": 22,
-          "minimumQuantity": null,
-          "quantity": "3 macarons",
-          "maxFlavors": null,
-          "maxColors": null,
-          "flavors": null,
-          "themes": null,
-          "notes": []
-        }
-      ]
     },
     {
       "id": "macaron-torre",
@@ -554,6 +433,165 @@
           "notes": [
             "Consultar cores especiais"
           ]
+        }
+      ]
+    },
+    {
+      "id": "macaron-individual",
+      "category": "macarons",
+      "name": "Macaron individual",
+      "description": "Macaron com sabores à escolha. Mínimo de 20 unidades da mesma cor.",
+      "price": 60,
+      "priceUnit": "por unidade",
+      "unit": [
+        "macaron",
+        "macarons"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": 20,
+      "quantity": "1 unidade",
+      "images": [
+        "macaron-individual-4052c2a209.webp",
+        "macaron-individual.png"
+      ],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro",
+        "Brigadeiro branco",
+        "Limão-siciliano",
+        "Maracujá",
+        "Caramelo",
+        "Ninho com Nutella",
+        "Pistache",
+        "Nozes"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": 20,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": "free",
+      "themes": [],
+      "customizable": true,
+      "notes": [
+        "Mínimo 20 da mesma cor",
+        "Cores especiais (neon, dourado e prateado): preço sob consulta"
+      ],
+      "featured": true,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "macaron-caixinha",
+      "category": "macarons",
+      "name": "Caixinha presenteável de macarons",
+      "description": "Caixinha com 1, 2 ou 3 macarons, com fita e tag.",
+      "price": null,
+      "priceUnit": "por caixinha",
+      "unit": [
+        "caixinha",
+        "caixinhas"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [
+        "macaron-caixinha.png"
+      ],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro",
+        "Brigadeiro branco",
+        "Limão-siciliano",
+        "Maracujá",
+        "Caramelo",
+        "Ninho com Nutella",
+        "Pistache",
+        "Nozes"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": "free",
+      "themes": [],
+      "customizable": true,
+      "notes": [
+        "Fita e tag",
+        "Cores especiais (neon, dourado e prateado): preço sob consulta"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [
+        {
+          "key": "macarons-na-caixinha",
+          "label": "Macarons na caixinha"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Caixinha com 1 macaron",
+          "options": {
+            "macarons-na-caixinha": "1 macaron"
+          },
+          "price": 8,
+          "minimumQuantity": null,
+          "quantity": "1 macaron",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Caixinha com 2 macarons",
+          "options": {
+            "macarons-na-caixinha": "2 macarons"
+          },
+          "price": 15,
+          "minimumQuantity": null,
+          "quantity": "2 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Caixinha com 3 macarons",
+          "options": {
+            "macarons-na-caixinha": "3 macarons"
+          },
+          "price": 22,
+          "minimumQuantity": null,
+          "quantity": "3 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
         }
       ]
     },
