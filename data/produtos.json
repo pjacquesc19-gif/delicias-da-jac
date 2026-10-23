@@ -14,20 +14,20 @@
       "Nossa missão é oferecer atendimento de excelência e encantar os convidados por meio de doces artesanais."
     ],
     "tema": {
-      "nome": "personalizada",
+      "nome": "natal",
       "rosa": "#D62839",
       "bebe": "#F7DCDC",
       "lilas": "#1E7B4F",
       "menta": "#CFE8D6",
-      "creme": "#F5B8B4",
+      "creme": "#FFFAF4",
       "ameixa": "#4A1A1F",
-      "suave": "#6C3A3D",
+      "suave": "#6E474A",
       "linha": "#EDD0D1",
       "ameixaRgb": "74,26,31",
       "rodapeTexto": "#FBEEEE",
       "realceSuave": "#FCF1F1"
     },
-    "versao": "2026-10-23.1"
+    "versao": "2026-10-23.2"
   },
   "categories": [
     {
