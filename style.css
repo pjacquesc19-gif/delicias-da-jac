@@ -274,3 +274,20 @@ dialog::backdrop{background:rgba(var(--ameixa-rgb),.55)}
 .k-check{width:64px;height:64px;margin:.3rem auto 0;border-radius:50%;background:var(--menta);color:var(--ameixa);font-size:2rem;font-weight:700;display:grid;place-items:center}
 .k-id strong{font-family:var(--titulo);font-size:1.5rem;color:var(--lilas);letter-spacing:.5px}
 @media(max-width:420px){.k-two{grid-template-columns:1fr}}
+
+/* ---------- Catálogos especiais (Fase 3 · Entrega 3) ---------- */
+.season-banner{background:linear-gradient(160deg,var(--bebe),var(--creme) 75%);border-bottom:3px solid var(--bebe);padding:1.6rem 0 1.2rem}
+.season-banner h2{font-family:var(--titulo);font-size:clamp(1.6rem,4vw,2.2rem);margin:.1rem 0 .4rem;color:var(--ameixa)}
+.season-banner p{margin:.3rem 0;color:var(--suave);max-width:46rem}
+.season-banner .sb-kicker{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--lilas);margin:0}
+.season-banner .sb-dates{font-weight:600;color:var(--ameixa)}
+.season-banner .sb-closed{background:#fff;border-left:4px solid var(--rosa);border-radius:10px;padding:.6rem .8rem;color:var(--ameixa)}
+.season-banner .btn{margin-top:.4rem}
+.season-strip{padding:1.1rem 0 .4rem}
+.season-strip h2{font-family:var(--titulo);font-size:1.3rem;margin:0 0 .6rem;color:var(--ameixa)}
+.ss-list{display:flex;gap:.7rem;overflow-x:auto;padding-bottom:.4rem;scroll-snap-type:x mandatory}
+.ss-card{flex:0 0 auto;min-width:13rem;max-width:18rem;scroll-snap-align:start;display:flex;flex-direction:column;gap:.15rem;background:var(--card);border:2px solid var(--bebe);border-radius:var(--raio);padding:.75rem .95rem;color:var(--ameixa);text-decoration:none;box-shadow:var(--sombra);transition:transform var(--t),border-color var(--t)}
+.ss-card:hover{transform:translateY(-2px);border-color:var(--rosa)}
+.ss-card strong{font-size:1.02rem}
+.ss-card span{font-size:.85rem;color:var(--suave)}
+.ss-card .ss-cart{color:var(--lilas);font-weight:700}

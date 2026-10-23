@@ -5,11 +5,17 @@
      Configuração. Caminhos relativos, para funcionar no GitHub Pages
      mesmo quando o site está em um subdiretório (usuario.github.io/repo/).
      ===================================================================== */
-  const DATA_URL = 'data/produtos.json';
+  // Catálogo desta página. A página de um catálogo sazonal (ex.: …/natal-2026/) é uma cópia desta, gerada pelo
+  // painel, com <base href="../"> e <meta name="dj-catalogo">: mesmo CSS, mesmo JS e mesmas fotos.
+  const PAGE_CATALOG = (document.querySelector('meta[name="dj-catalogo"]') || {}).content || '';
+  const DATA_URL = PAGE_CATALOG ? `data/catalogos/${PAGE_CATALOG}.json` : 'data/produtos.json';
+  const INDEX_URL = 'data/catalogos/index.json';   // catálogos especiais (faixa no topo do catálogo)
   const IMG_DIR = 'public/images/produtos/';
   const BRAND_DIR = 'public/images/marca/';
   const DEFAULT_IMG = 'public/images/padrao.svg';
-  const CART_KEY = 'delicias-da-jac:carrinho:v1';
+  const CART_BASE = 'delicias-da-jac:carrinho:v1';
+  // Um carrinho por catálogo (decisão de 2026-10-23): o Tradicional continua com a chave de sempre.
+  const cartKeyOf = (id) => (id && id !== 'tradicional' ? `${CART_BASE}:${id}` : CART_BASE);
   const OTHER_COLOR = 'Outro';
   const OTHER_THEME = 'Outros';
   const SPECIAL_COLOR_RE = /neon|dourad|pratead/; // cores que exigem orçamento (texto digitado em "Outro")
@@ -29,6 +35,7 @@
   const imagesOf = (p) => (p.images || []).filter(okImage);
 
   let DATA = null;
+  let CATALOG_INDEX = null;   // data/catalogos/index.json (carregado depois do catálogo; se falhar, a faixa não aparece)
   const PRODUCTS = {}; // id -> produto
   const COLORS = {};   // nome -> {name, hex, consult}
   const CATEGORIES = {};
@@ -82,6 +89,74 @@
   }
 
   /* =====================================================================
+     Catálogo sazonal (meta.catalogo: status e prazos, publicados pelo painel).
+     O servidor das encomendas confere as mesmas regras com o arquivo publicado.
+     ===================================================================== */
+  const season = () => (DATA && DATA.meta && DATA.meta.catalogo) || null;
+  const catalogId = () => (season() && season().id) || PAGE_CATALOG || '';
+  function seasonState() {
+    const c = season();
+    if (!c) return { open: true };
+    const today = todaySP(), nome = c.nome || 'este catálogo';
+    if (c.status === 'arquivado') return { open: false, archived: true, msg: `O catálogo ${nome} foi encerrado.` };
+    if (c.status !== 'publicado') return { open: false, msg: `As encomendas do ${nome} estão encerradas.` };
+    if (c.inicio && today < c.inicio) return { open: false, msg: `As encomendas do ${nome} abrem em ${brDate(c.inicio)}.` };
+    if (c.fimPedidos && today > c.fimPedidos) return { open: false, msg: `As encomendas do ${nome} terminaram em ${brDate(c.fimPedidos)}.` };
+    return { open: true };
+  }
+  const shortDate = (iso) => brDate(iso).slice(0, 5);
+  function seasonDates(c) {
+    const a = [];
+    if (c.fimPedidos) a.push(`Pedidos até ${shortDate(c.fimPedidos)}`);
+    if (c.retiradaInicio && c.retiradaFim) a.push(`retiradas de ${shortDate(c.retiradaInicio)} a ${shortDate(c.retiradaFim)}`);
+    return a.join(' · ');
+  }
+
+  /** Faixa do catálogo sazonal, no topo da página (nome, descrição, prazos, encerrado/arquivado). */
+  function renderSeason() {
+    const c = season();
+    let el = $('#season-banner');
+    if (!c) { if (el) el.remove(); return; }
+    document.title = `${c.nome} · ${DATA.meta.brand}`;
+    if (!el) { el = document.createElement('section'); el.id = 'season-banner'; el.className = 'season-banner'; $('main').prepend(el); }
+    const st = seasonState();
+    el.innerHTML = `<div class="wrap"><p class="sb-kicker">Catálogo especial</p><h2>${esc(c.nome)}</h2>`
+      + (c.descricao ? `<p>${esc(c.descricao)}</p>` : '')
+      + (st.archived ? '' : (seasonDates(c) ? `<p class="sb-dates">${esc(seasonDates(c))}</p>` : ''))
+      + (st.open ? '' : `<p class="sb-closed" role="status"><strong>${esc(st.archived ? st.msg : 'Encomendas encerradas.')}</strong>${st.archived ? '' : ' ' + esc(st.msg)}</p>`)
+      + '<p><a class="btn ghost" href="./">Ver o catálogo tradicional</a></p></div>';
+    // Arquivado: o endereço continua existindo (links divulgados), mas sem produtos.
+    $('#catalogo').hidden = !!st.archived;
+    $('#catalog').closest('section').hidden = !!st.archived;
+  }
+
+  /** Faixa "Catálogos especiais": os outros catálogos publicados (e o Tradicional, nas páginas sazonais). */
+  function renderStrip() {
+    let el = $('#season-strip');
+    const me = catalogId();
+    const list = CATALOG_INDEX && Array.isArray(CATALOG_INDEX.catalogos) ? CATALOG_INDEX.catalogos.filter((c) => c.id !== me && /^[a-z0-9-]+\/$/.test(c.url || '')) : [];
+    const cards = list.map((c) => ({ nome: c.nome, url: c.url, info: c.status === 'encerrado' ? 'Encomendas encerradas' : seasonDates(c), key: cartKeyOf(c.id), cores: c.cores }));
+    if (me) cards.unshift({ nome: (CATALOG_INDEX && CATALOG_INDEX.padrao && CATALOG_INDEX.padrao.nome) || 'Catálogo tradicional', url: './', info: 'Produtos de todos os dias', key: CART_BASE });
+    if (!cards.length) { if (el) el.remove(); return; }
+    if (!el) { el = document.createElement('section'); el.id = 'season-strip'; el.className = 'season-strip'; el.setAttribute('aria-label', 'Outros catálogos'); $('#catalogo').before(el); }
+    const inCart = (key) => { try { const r = JSON.parse(localStorage.getItem(key)); return r && Array.isArray(r.items) ? r.items.length : 0; } catch { return 0; } };
+    el.innerHTML = `<div class="wrap"><h2>${me ? 'Outros catálogos' : 'Catálogos especiais'}</h2><div class="ss-list">` + cards.map((c) => {
+      const n = inCart(c.key), hex = (v) => (/^#[0-9A-Fa-f]{6}$/.test(v || '') ? v : '');
+      const style = c.cores && hex(c.cores.destaque) ? ` style="border-color:${hex(c.cores.destaque)}"` : '';
+      return `<a class="ss-card" href="${esc(c.url)}"${style}><strong>${esc(c.nome)}</strong>${c.info ? `<span>${esc(c.info)}</span>` : ''}`
+        + (n ? `<span class="ss-cart">${n} ${plural(n, 'item', 'itens')} no carrinho</span>` : '') + '</a>';
+    }).join('') + '</div></div>';
+  }
+  async function loadCatalogIndex() {
+    try {
+      const res = await fetch(INDEX_URL, { cache: 'no-cache' });
+      if (!res.ok) return;
+      CATALOG_INDEX = await res.json();
+      renderStrip();
+    } catch { /* sem índice: a faixa simplesmente não aparece */ }
+  }
+
+  /* =====================================================================
      Imagens (com imagem padrão quando o arquivo não existe)
      ===================================================================== */
   function mediaHTML(p, cls = 'media', index = 0) {
@@ -112,11 +187,11 @@
 
   /* ---------- Carrinho: persistência ---------- */
   function saveCart() {
-    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch { /* armazenamento indisponível */ }
+    try { localStorage.setItem(cartKeyOf(catalogId()), JSON.stringify(cart)); } catch { /* armazenamento indisponível */ }
   }
   function loadCart() {
     let raw = null;
-    try { raw = JSON.parse(localStorage.getItem(CART_KEY)); } catch { /* ignora */ }
+    try { raw = JSON.parse(localStorage.getItem(cartKeyOf(catalogId()))); } catch { /* ignora */ }
     if (!raw || !Array.isArray(raw.items)) return 0;
     let dropped = 0;
     const items = [];
@@ -218,7 +293,7 @@
         ${selectorsHTML(p, s.vi)}
         ${hint ? `<p class="opts">${esc(hint)}</p>` : ''}
         <div class="actions">
-          <button type="button" class="btn" data-act="add"${p.available ? '' : ' disabled'}>${p.available ? 'Adicionar ao carrinho' : 'Indisponível no momento'}</button>
+          <button type="button" class="btn" data-act="add"${p.available && seasonState().open ? '' : ' disabled'}>${!seasonState().open ? 'Encomendas encerradas' : p.available ? 'Adicionar ao carrinho' : 'Indisponível no momento'}</button>
           <button type="button" class="btn ghost" data-act="toggle" aria-expanded="${s.open}">${s.open ? 'Ocultar detalhes' : 'Ver detalhes'}</button>
         </div>
         ${details}
@@ -294,6 +369,8 @@
   const ctx = (d) => { const p = PRODUCTS[d.pid], v = variantsOf(p)[d.vi]; return { p, v, c: cfg(p, v) }; };
 
   function openProduct(pid, vi, item = null, fromCart = false) {
+    const st = seasonState();
+    if (!st.open) { toast(st.msg); return; }
     const p = PRODUCTS[pid];
     draft = newDraft(p, vi, item, fromCart);
     buildModal();
@@ -609,9 +686,11 @@
       <p class="c-legal">${ordersOnline()
         ? 'Enviar a solicitação não confirma a encomenda: a confeitaria confere a disponibilidade da data e responde. A reserva só vale após o pagamento de 50%.'
         : 'Enviar o pedido não o confirma. A reserva só vale após o atendimento e o pagamento de 50%.'}</p>
-      ${ordersOnline()
-        ? '<button type="button" class="btn wa" data-cact="checkout">Finalizar encomenda</button>'
-        : '<button type="button" class="btn wa" data-cact="finish">Finalizar pedido pelo WhatsApp</button>'}
+      ${!seasonState().open
+        ? `<p class="c-note warn">${esc(seasonState().msg)}</p>`
+        : ordersOnline()
+          ? '<button type="button" class="btn wa" data-cact="checkout">Finalizar encomenda</button>'
+          : '<button type="button" class="btn wa" data-cact="finish">Finalizar pedido pelo WhatsApp</button>'}
       <div class="c-row"><button type="button" class="btn ghost" data-close>Continuar comprando</button><button type="button" class="link danger" data-cact="clear">Esvaziar carrinho</button></div>`;
   }
 
@@ -722,6 +801,15 @@
     return '55' + d;
   }
 
+  /** Datas de retirada possíveis: as de sempre, limitadas ao período de retirada do catálogo sazonal. */
+  function pickupRange() {
+    const today = todaySP(), c = season();
+    let min = today, max = addDays(today, 366);
+    if (c && c.retiradaInicio && c.retiradaInicio > min) min = c.retiradaInicio;
+    if (c && c.retiradaFim && c.retiradaFim < max) max = c.retiradaFim;
+    return { min, max };
+  }
+
   function validateCheckout(v) {
     const e = {}, nome = v.nome.trim().replace(/\s+/g, ' ');
     if (nome.length < 5 || nome.split(' ').filter((w) => w.length > 1).length < 2 || !NAME_RE.test(nome)) e.nome = 'Informe seu nome completo.';
@@ -732,6 +820,7 @@
     else if (v.data < today) e.data = 'A data não pode estar no passado.';
     else if (v.data > addDays(today, 366)) e.data = 'Escolha uma data mais próxima.';
     else if (d.getUTCDay() === 0) e.data = 'Não há atendimento aos domingos. Escolha outro dia.';
+    else if (season() && (v.data < pickupRange().min || v.data > pickupRange().max)) e.data = `Para o ${season().nome}, as retiradas são de ${brDate(pickupRange().min)} a ${brDate(pickupRange().max)}.`;
     if (!v.horario) e.horario = 'Escolha o horário de retirada.';
     else if (!slotList(v.data).includes(v.horario)) e.horario = v.data === today ? 'Esse horário de hoje já passou.' : 'Escolha um horário entre 9h e 20h.';
     return e;
@@ -763,6 +852,7 @@
   }
 
   function openCheckout() {
+    if (!seasonState().open) { toast(seasonState().msg); return; }
     // Garante que o carrinho ainda respeita os mínimos do catálogo atual.
     const bad = cart.items.findIndex((it) => { const r = priceOf(it); return it.qty < minEff(r.p, r.c, it.colors.length); });
     if (bad >= 0) { toast(`O item ${bad + 1} está abaixo do pedido mínimo. Ajuste no carrinho.`); return; }
@@ -789,9 +879,9 @@
           <label class="f"><span>E-mail</span><input id="k-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="120" value="${esc(v.email)}"${bad('email')}>${err('email')}</label>
         </fieldset>
         <fieldset class="fs"><legend>Retirada</legend>
-          <p class="hint">Retiradas das 9h às 20h, de segunda a sábado. Não há atendimento aos domingos. <strong>A data solicitada depende de confirmação da confeitaria.</strong></p>
+          <p class="hint">${season() ? `<strong>${esc(season().nome)}: retiradas de ${brDate(pickupRange().min)} a ${brDate(pickupRange().max)}.</strong> ` : ''}Retiradas das 9h às 20h, de segunda a sábado. Não há atendimento aos domingos. <strong>A data solicitada depende de confirmação da confeitaria.</strong></p>
           <div class="k-two">
-            <label class="f"><span>Data desejada</span><input id="k-data" name="data" type="date" min="${today}" max="${addDays(today, 366)}" value="${esc(v.data)}"${bad('data')}>${err('data')}</label>
+            <label class="f"><span>Data desejada</span><input id="k-data" name="data" type="date" min="${pickupRange().min}" max="${pickupRange().max}" value="${esc(v.data)}"${bad('data')}>${err('data')}</label>
             <label class="f"><span>Horário desejado</span><select id="k-horario" name="horario"${bad('horario')}>${opt(slots, v.horario)}</select>${err('horario')}</label>
           </div>
         </fieldset>
@@ -827,7 +917,9 @@
       })),
     };
     const sig = JSON.stringify(content);
-    return { action: 'criarPedido', requestId: requestIdFor(sig), elapsedMs: Date.now() - ck.openedAt, website: ($('#k-website') || {}).value || '', totalCliente: orderTotals().total, ...content };
+    // Catálogo e versão que a cliente viu: o servidor confere preços e prazos no arquivo publicado DESTE catálogo.
+    const catalogo = { id: catalogId() || 'tradicional', versao: (DATA.meta && DATA.meta.versao) || '' };
+    return { action: 'criarPedido', requestId: requestIdFor(sig), elapsedMs: Date.now() - ck.openedAt, website: ($('#k-website') || {}).value || '', totalCliente: orderTotals().total, catalogo, ...content };
   }
 
   function setSending(on) {
@@ -959,7 +1051,7 @@
       const res = await fetch(DATA_URL, { cache: 'no-store' });
       if (!res.ok) return;
       applyData(await res.json());
-      renderCatalog(); renderCart();
+      renderSeason(); renderCatalog(); renderCart();
       if (ck && !ck.done) { const sec = $('.k-sum'); if (sec) sec.outerHTML = summaryHTML(); }
     } catch { /* mantém o catálogo atual */ }
   }
@@ -1026,9 +1118,14 @@
       goToCatalog(true);
     });
     // Links "Catálogo" / "Ver catálogo": rolagem exata (sem guardar #catalogo no endereço, para o site reabrir no topo).
+    // Nas páginas sazonais (<base href="../">), os links "#seção" levariam à página principal: rolam aqui mesmo.
     document.addEventListener('click', (e) => {
-      const a = e.target.closest('a[href="#catalogo"]'); if (!a) return;
-      e.preventDefault(); goToCatalog(true);
+      const a = e.target.closest('a[href^="#"]'); if (!a) return;
+      const href = a.getAttribute('href');
+      if (href === '#catalogo') { e.preventDefault(); goToCatalog(true); return; }
+      if (!PAGE_CATALOG || href.length < 2) return;
+      const el = document.getElementById(href.slice(1)); if (!el) return;
+      e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     $('#search').addEventListener('input', (e) => { state.q = e.target.value; renderCatalog(); });
     $('#sort').addEventListener('change', (e) => { state.sort = e.target.value; renderCatalog(); });
@@ -1113,7 +1210,9 @@
     applyData(DATA);
     initBrand();
     const dropped = loadCart();
+    renderSeason();
     renderNav(); renderCatalog(); renderCart();
+    loadCatalogIndex();   // faixa dos outros catálogos (não segura a abertura da página)
     // Com o conteúdo já montado: link com #catalogo (ou outra seção) vai ao lugar certo; sem link, topo.
     const anchorOnOpen = () => {
       if (location.hash === '#catalogo') goToCatalog(false);
