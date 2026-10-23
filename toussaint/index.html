@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <base href="../">
+  <meta name="dj-catalogo" content="toussaint">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toussaint · Delícias da Jac</title>
+  <meta name="description" content="Catálogo da Delícias da Jac: macarons, suspiros, lembrancinhas, brownies e bem-casados. Monte seu pedido e envie pelo WhatsApp.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header" id="topo">
+    <div class="wrap bar">
+      <a class="logo" href="#topo" aria-label="Delícias da Jac, início">
+        <img class="logo-img" id="logo-img" alt="Delícias da Jac" hidden>
+        <span class="logo-text" id="logo-text">Delícias da Jac</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a class="nav-link" href="#catalogo">Catálogo</a>
+        <a class="nav-link" href="#historia">Nossa história</a>
+        <a class="nav-link" href="#encomendas">Encomendas</a>
+        <a class="nav-wa" id="header-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      </nav>
+      <button type="button" class="cart-btn" id="open-cart" aria-label="Abrir carrinho, 0 itens">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-label">Carrinho</span>
+        <span class="badge" id="cart-count" aria-hidden="true">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>Faremos seus convidados suspirarem</h1>
+        <p>Macarons, suspiros, lembrancinhas, brownies e bem-casados para a sua festa. Escolha no catálogo, personalize e envie seu pedido pelo WhatsApp.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#catalogo">Ver catálogo</a>
+          <a class="btn ghost" href="#encomendas">Como encomendar</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="story" id="historia" aria-labelledby="historia-t">
+      <div class="wrap story-grid" id="story-grid">
+        <figure class="story-photo" id="story-photo" hidden>
+          <img id="story-img" alt="" width="480" height="600">
+        </figure>
+        <div class="story-text">
+          <h2 id="historia-t">Conheça a Delícias da Jac</h2>
+          <div id="story-body"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="catnav-wrap" id="catalogo">
+      <nav class="catnav wrap" id="catnav" aria-label="Categorias do catálogo"></nav>
+    </div>
+
+    <section class="wrap">
+      <div class="toolbar">
+        <label class="f grow"><span>Buscar produto</span><input type="search" id="search" placeholder="Ex.: brownie, torre, pirulito"></label>
+        <label class="f"><span>Ordenar por preço</span>
+          <select id="sort"><option value="default">Ordem do catálogo</option><option value="asc">Menor preço</option><option value="desc">Maior preço</option></select>
+        </label>
+      </div>
+      <p class="count" id="count" aria-live="polite"></p>
+      <div id="catalog"><p class="status">Carregando o catálogo…</p></div>
+      <div class="empty" id="empty" hidden>
+        <p>Nenhum produto encontrado para essa busca.</p>
+        <button type="button" class="btn ghost" id="clear">Limpar busca e filtros</button>
+      </div>
+    </section>
+
+    <section class="orders" id="encomendas" aria-labelledby="enc-t">
+      <div class="wrap">
+        <h2 id="enc-t">Informações sobre pedidos</h2>
+        <ul class="info-list">
+          <li><strong>Pagamento</strong> via Pix, boleto ou dinheiro.</li>
+          <li><strong>Reserva</strong> confirmada mediante pagamento de 50% e envio do comprovante.</li>
+          <li><strong>Restante</strong>: os 50% finais são pagos antes da retirada.</li>
+          <li><strong>Retirada</strong> na Freguesia, Ilha do Governador, Rio de Janeiro.</li>
+          <li><strong>Horário de retirada</strong>: 9h às 20h.</li>
+          <li><strong>Entrega</strong>: não realizamos entregas próprias. É possível solicitar um Uber por conta do cliente.</li>
+          <li><strong>Domingos</strong>: não há atendimento.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap">
+        <h2>Ficou com alguma dúvida?</h2>
+        <p>Fale com a gente sobre datas, quantidades e temas.</p>
+        <a class="btn big" id="cta-wa" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap foot">
+      <div class="foot-brand">
+        <span class="foot-logo" id="foot-logo" hidden><img id="foot-logo-img" alt="Delícias da Jac"></span>
+        <p><strong>Delícias da Jac</strong><br>Freguesia, Ilha do Governador, Rio de Janeiro</p>
+      </div>
+      <p><a id="foot-ig" href="#" target="_blank" rel="noopener"></a><br><a id="foot-wa" href="#" target="_blank" rel="noopener"></a></p>
+    </div>
+  </footer>
+
+  <!-- Modal de personalização (conteúdo montado pelo script.js) -->
+  <dialog id="product-dialog" class="modal" aria-labelledby="m-title">
+    <div class="modal-head">
+      <h2 id="m-title">Personalizar pedido</h2>
+      <button type="button" class="close" data-close aria-label="Fechar">&times;</button>
+    </div>
+    <div class="modal-body" id="m-body"></div>
+    <div class="modal-foot" id="m-foot"></div>
+  </dialog>
+
+  <!-- Carrinho -->
+  <dialog id="cart-dialog" class="drawer" aria-labelledby="c-title">
+    <div class="modal-head">
+      <h2 id="c-title">Seu carrinho</h2>
+      <button type="button" class="close" data-close aria-label="Fechar carrinho">&times;</button>
+    </div>
+    <div class="drawer-body" id="c-body"></div>
+    <div class="modal-foot" id="c-foot"></div>
+  </dialog>
+
+  <!-- Finalizar encomenda (formulário + resumo; conteúdo montado pelo script.js) -->
+  <dialog id="checkout-dialog" class="modal checkout" aria-labelledby="k-title">
+    <div class="modal-head">
+      <h2 id="k-title">Finalizar encomenda</h2>
+      <button type="button" class="close" data-close aria-label="Fechar">&times;</button>
+    </div>
+    <div class="modal-body" id="k-body"></div>
+    <div class="modal-foot" id="k-foot"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <button type="button" class="totop" id="totop" aria-label="Voltar ao topo" hidden>↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

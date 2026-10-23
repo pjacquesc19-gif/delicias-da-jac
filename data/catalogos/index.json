@@ -1,0 +1,21 @@
+{
+  "padrao": {
+    "nome": "Catálogo Tradicional",
+    "url": "./"
+  },
+  "catalogos": [
+    {
+      "id": "toussaint",
+      "slug": "toussaint",
+      "nome": "Toussaint",
+      "descricao": "",
+      "capa": "",
+      "status": "publicado",
+      "inicio": "2026-10-23",
+      "fimPedidos": "2027-10-31",
+      "retiradaInicio": "2026-10-24",
+      "retiradaFim": "2027-11-07",
+      "url": "toussaint/"
+    }
+  ]
+}

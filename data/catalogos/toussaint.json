@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "ordersEndpoint": "https://script.google.com/macros/s/AKfycbzYTEcM6CsepahQodXVdxLfoniWyuK3jR0cMtyKtu5ij0_Fhezup8gbzQWafbM8Ydmo/exec",
+    "brand": "Delícias da Jac",
+    "whatsapp": "5521985075217",
+    "whatsappLabel": "(21) 98507-5217",
+    "instagram": "deliciasda_jac",
+    "owner": "Renata Jacques",
+    "logo": "logo.png",
+    "ownerPhoto": "renata-jacques.jpg",
+    "about": [
+      "Renata Jacques, proprietária da Delícias da Jac, é psicóloga e se dedica à confeitaria há aproximadamente cinco anos. Hoje é especializada em suspiros, macarons e brownies.",
+      "Nesse caminho, já atendeu mais de 2.000 festas, preparando cada encomenda de forma artesanal.",
+      "Nossa missão é oferecer atendimento de excelência e encantar os convidados por meio de doces artesanais."
+    ],
+    "catalogo": {
+      "id": "toussaint",
+      "slug": "toussaint",
+      "nome": "Toussaint",
+      "descricao": "",
+      "capa": "",
+      "status": "publicado",
+      "inicio": "2026-10-23",
+      "fimPedidos": "2027-10-31",
+      "retiradaInicio": "2026-10-24",
+      "retiradaFim": "2027-11-07"
+    },
+    "versao": "2026-10-23.3"
+  },
+  "categories": [
+    {
+      "id": "teste",
+      "name": "Teste!!!!",
+      "description": ""
+    }
+  ],
+  "colors": [
+    {
+      "name": "Rosa",
+      "hex": "#F48FB1",
+      "consult": false
+    },
+    {
+      "name": "Azul",
+      "hex": "#4A90D9",
+      "consult": false
+    },
+    {
+      "name": "Verde",
+      "hex": "#5DBB63",
+      "consult": false
+    },
+    {
+      "name": "Amarelo",
+      "hex": "#F7D54A",
+      "consult": false
+    },
+    {
+      "name": "Lilás",
+      "hex": "#B57EDC",
+      "consult": false
+    },
+    {
+      "name": "Vermelho",
+      "hex": "#D64545",
+      "consult": false
+    },
+    {
+      "name": "Branco",
+      "hex": "#FFFFFF",
+      "consult": false
+    },
+    {
+      "name": "Laranja",
+      "hex": "#F5923E",
+      "consult": false
+    },
+    {
+      "name": "Preto",
+      "hex": "#222222",
+      "consult": false
+    },
+    {
+      "name": "Dourado",
+      "hex": "#D4AF37",
+      "consult": true
+    },
+    {
+      "name": "Prateado",
+      "hex": "#C0C0C0",
+      "consult": true
+    }
+  ],
+  "themes": [
+    "Arco-íris",
+    "Jardim encantado",
+    "Borboletas",
+    "Flores",
+    "Ursinhos",
+    "Safari",
+    "Fundo do mar",
+    "Patrulha Canina",
+    "Stitch",
+    "Casa da Gabby",
+    "Princesas",
+    "Minnie",
+    "Dinossauros"
+  ],
+  "products": [
+    {
+      "id": "macaron-individual",
+      "category": "teste",
+      "name": "Macaron individual",
+      "description": "Macaron com sabores à escolha. Mínimo de 20 unidades da mesma cor.",
+      "price": 60,
+      "priceUnit": "por unidade",
+      "unit": [
+        "macaron",
+        "macarons"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": 20,
+      "quantity": "1 unidade",
+      "images": [
+        "macaron-individual-4052c2a209.webp",
+        "macaron-individual.png"
+      ],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro",
+        "Brigadeiro branco",
+        "Limão-siciliano",
+        "Maracujá",
+        "Caramelo",
+        "Ninho com Nutella",
+        "Pistache",
+        "Nozes"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": 20,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": "free",
+      "themes": [],
+      "customizable": true,
+      "notes": [
+        "Mínimo 20 da mesma cor",
+        "Cores especiais (neon, dourado e prateado): preço sob consulta"
+      ],
+      "featured": true,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    }
+  ]
+}
