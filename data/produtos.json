@@ -13,7 +13,21 @@
       "Nesse caminho, já atendeu mais de 2.000 festas, preparando cada encomenda de forma artesanal.",
       "Nossa missão é oferecer atendimento de excelência e encantar os convidados por meio de doces artesanais."
     ],
-    "versao": "2026-10-22.5"
+    "tema": {
+      "nome": "personalizada",
+      "rosa": "#D62839",
+      "bebe": "#F7DCDC",
+      "lilas": "#1E7B4F",
+      "menta": "#CFE8D6",
+      "creme": "#F5B8B4",
+      "ameixa": "#4A1A1F",
+      "suave": "#6C3A3D",
+      "linha": "#EDD0D1",
+      "ameixaRgb": "74,26,31",
+      "rodapeTexto": "#FBEEEE",
+      "realceSuave": "#FCF1F1"
+    },
+    "versao": "2026-10-23.1"
   },
   "categories": [
     {
@@ -143,7 +157,7 @@
       ],
       "gramsPerUnit": 1000,
       "minimumQuantity": null,
-      "quantity": "1 parsec",
+      "quantity": "1 m",
       "images": [
         "lombriga-moribunda-eeae0ed80b.webp",
         "lombriga-moribunda-010bae9afd.webp"
@@ -437,62 +451,6 @@
       ]
     },
     {
-      "id": "macaron-individual",
-      "category": "macarons",
-      "name": "Macaron individual",
-      "description": "Macaron com sabores à escolha. Mínimo de 20 unidades da mesma cor.",
-      "price": 60,
-      "priceUnit": "por unidade",
-      "unit": [
-        "macaron",
-        "macarons"
-      ],
-      "gramsPerUnit": null,
-      "minimumQuantity": 20,
-      "quantity": "1 unidade",
-      "images": [
-        "macaron-individual-4052c2a209.webp",
-        "macaron-individual.png"
-      ],
-      "badge": null,
-      "flavors": [
-        "Brigadeiro",
-        "Brigadeiro branco",
-        "Limão-siciliano",
-        "Maracujá",
-        "Caramelo",
-        "Ninho com Nutella",
-        "Pistache",
-        "Nozes"
-      ],
-      "flavorChoice": "many",
-      "minPerColor": 20,
-      "colors": [
-        "Rosa",
-        "Azul",
-        "Verde",
-        "Amarelo",
-        "Lilás",
-        "Vermelho",
-        "Branco",
-        "Laranja",
-        "Preto",
-        "Dourado",
-        "Prateado"
-      ],
-      "maxColors": "free",
-      "themes": [],
-      "customizable": true,
-      "notes": [
-        "Mínimo 20 da mesma cor",
-        "Cores especiais (neon, dourado e prateado): preço sob consulta"
-      ],
-      "featured": true,
-      "available": true,
-      "selectors": [],
-      "variants": []
-    },
-    {
       "id": "macaron-caixinha",
       "category": "macarons",
       "name": "Caixinha presenteável de macarons",
@@ -594,6 +552,62 @@
           "notes": []
         }
       ]
+    },
+    {
+      "id": "macaron-individual",
+      "category": "macarons",
+      "name": "Macaron individual",
+      "description": "Macaron com sabores à escolha. Mínimo de 20 unidades da mesma cor.",
+      "price": 60,
+      "priceUnit": "por unidade",
+      "unit": [
+        "macaron",
+        "macarons"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": 20,
+      "quantity": "1 unidade",
+      "images": [
+        "macaron-individual-4052c2a209.webp",
+        "macaron-individual.png"
+      ],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro",
+        "Brigadeiro branco",
+        "Limão-siciliano",
+        "Maracujá",
+        "Caramelo",
+        "Ninho com Nutella",
+        "Pistache",
+        "Nozes"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": 20,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": "free",
+      "themes": [],
+      "customizable": true,
+      "notes": [
+        "Mínimo 20 da mesma cor",
+        "Cores especiais (neon, dourado e prateado): preço sob consulta"
+      ],
+      "featured": true,
+      "available": true,
+      "selectors": [],
+      "variants": []
     },
     {
       "id": "pirulito-simples",
