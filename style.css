@@ -1,9 +1,11 @@
 :root{
   --rosa:#F247A3; --bebe:#F8D5E5; --lilas:#C52BD5; --menta:#A5DDD3; --creme:#FFF7FA; --ameixa:#582D50;
   --suave:#7a4f70; --linha:#efd3e1; --card:#fff; --erro:#9b1c4a; --erro-bg:#fde8f1;
+  /* tons derivados (a paleta de cada catálogo pode trocar todos; ver applyTheme no script.js) */
+  --ameixa-rgb:88,45,80; --rodape-texto:#fbe9f2; --realce-suave:#fdf0f6;
   --titulo:"Iowan Old Style","Palatino Linotype",Georgia,serif;
   --texto:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --raio:16px; --sombra:0 6px 18px rgba(88,45,80,.09); --t:.2s ease;
+  --raio:16px; --sombra:0 6px 18px rgba(var(--ameixa-rgb),.09); --t:.2s ease;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
@@ -114,7 +116,7 @@ input[type="color"]{padding:.2rem;width:3.2rem;height:44px;cursor:pointer}
 .cta{padding:3rem 0;text-align:center}
 .cta h2{font-size:1.8rem}
 .cta p{margin:.5rem 0 1.2rem;color:var(--suave)}
-.site-footer{background:var(--ameixa);color:#fbe9f2;padding:1.8rem 0}
+.site-footer{background:var(--ameixa);color:var(--rodape-texto);padding:1.8rem 0}
 .foot{display:flex;flex-wrap:wrap;gap:1rem 3rem;justify-content:space-between;align-items:center}
 .foot p{margin:0}
 .foot a{color:#fff}
@@ -124,8 +126,8 @@ input[type="color"]{padding:.2rem;width:3.2rem;height:44px;cursor:pointer}
 
 /* ---------- Modal (pop-up de personalização) e painel do carrinho ---------- */
 dialog{border:0;padding:0;color:var(--ameixa);background:var(--creme);max-width:none;max-height:none}
-dialog::backdrop{background:rgba(88,45,80,.55)}
-.modal{width:min(680px,94vw);max-height:min(90dvh,880px);border-radius:var(--raio);box-shadow:0 20px 60px rgba(88,45,80,.35)}
+dialog::backdrop{background:rgba(var(--ameixa-rgb),.55)}
+.modal{width:min(680px,94vw);max-height:min(90dvh,880px);border-radius:var(--raio);box-shadow:0 20px 60px rgba(var(--ameixa-rgb),.35)}
 .modal[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;animation:rise .2s ease}
 .drawer{position:fixed;inset:0 0 0 auto;width:min(440px,100%);height:100%;margin:0;border-radius:0}
 .drawer[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;animation:slide-in .25s ease}
@@ -169,10 +171,10 @@ dialog::backdrop{background:rgba(88,45,80,.55)}
 .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:.5rem}
 .swatch{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"dot name" "dot small";align-items:center;column-gap:.55rem;padding:.45rem .6rem;min-height:46px;border:1.5px solid var(--linha);background:#fff;color:var(--ameixa);border-radius:12px;cursor:pointer;text-align:left;font:600 .9rem var(--texto);transition:border-color var(--t),background var(--t)}
 .swatch:hover{border-color:var(--rosa)}
-.swatch .dot{grid-area:dot;width:24px;height:24px;border-radius:50%;border:1px solid rgba(88,45,80,.3)}
+.swatch .dot{grid-area:dot;width:24px;height:24px;border-radius:50%;border:1px solid rgba(var(--ameixa-rgb),.3)}
 .swatch .sw-name{grid-area:name}
 .swatch small{grid-area:small;font-size:.7rem;font-weight:500;color:var(--suave)}
-.swatch[aria-pressed="true"]{border-color:var(--ameixa);background:#fdf0f6;box-shadow:inset 0 0 0 1px var(--ameixa)}
+.swatch[aria-pressed="true"]{border-color:var(--ameixa);background:var(--realce-suave);box-shadow:inset 0 0 0 1px var(--ameixa)}
 .swatch[aria-pressed="true"] .dot{outline:2px solid var(--ameixa);outline-offset:2px}
 .other-color{display:flex;gap:.8rem;margin-top:.7rem;align-items:flex-end;flex-wrap:wrap}
 .pills{display:flex;flex-wrap:wrap;gap:.5rem}

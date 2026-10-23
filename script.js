@@ -1067,8 +1067,32 @@
     top.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
+  /* =====================================================================
+     Paleta de cores do catálogo (meta.tema, escolhida no painel). Sem tema, valem as cores do style.css.
+     A última paleta fica guardada no aparelho para a página já abrir com ela, sem piscar o rosa padrão.
+     ===================================================================== */
+  const THEME_KEY = 'delicias-da-jac:tema:v1';
+  const THEME_VARS = {
+    rosa: '--rosa', bebe: '--bebe', lilas: '--lilas', menta: '--menta', creme: '--creme', ameixa: '--ameixa',
+    suave: '--suave', linha: '--linha', ameixaRgb: '--ameixa-rgb', rodapeTexto: '--rodape-texto', realceSuave: '--realce-suave',
+  };
+  function applyTheme(t, remember) {
+    const st = document.documentElement.style;
+    Object.values(THEME_VARS).forEach((v) => st.removeProperty(v));
+    const ok = t && typeof t === 'object';
+    if (ok) {
+      Object.entries(THEME_VARS).forEach(([k, v]) => {
+        const x = String(t[k] || '');
+        if (k === 'ameixaRgb' ? /^\d{1,3},\d{1,3},\d{1,3}$/.test(x) : /^#[0-9A-Fa-f]{6}$/.test(x)) st.setProperty(v, x);
+      });
+    }
+    if (remember) { try { if (ok) localStorage.setItem(THEME_KEY, JSON.stringify(t)); else localStorage.removeItem(THEME_KEY); } catch { /* ignora */ } }
+  }
+  try { applyTheme(JSON.parse(localStorage.getItem(THEME_KEY)), false); } catch { /* sem paleta guardada */ }
+
   function applyData(json) {
     DATA = json;
+    applyTheme(json.meta && json.meta.tema, true);
     json.products.forEach((p) => { PRODUCTS[p.id] = p; });
     json.colors.forEach((c) => { COLORS[c.name] = c; });
     json.categories.forEach((c) => { CATEGORIES[c.id] = c; });
