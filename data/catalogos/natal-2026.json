@@ -1,0 +1,548 @@
+{
+  "meta": {
+    "ordersEndpoint": "https://script.google.com/macros/s/AKfycbzYTEcM6CsepahQodXVdxLfoniWyuK3jR0cMtyKtu5ij0_Fhezup8gbzQWafbM8Ydmo/exec",
+    "brand": "Delícias da Jac",
+    "whatsapp": "5521985075217",
+    "whatsappLabel": "(21) 98507-5217",
+    "instagram": "deliciasda_jac",
+    "owner": "Renata Jacques",
+    "logo": "logo.png",
+    "ownerPhoto": "renata-jacques.jpg",
+    "about": [
+      "Renata Jacques, proprietária da Delícias da Jac, é psicóloga e se dedica à confeitaria há aproximadamente cinco anos. Hoje é especializada em suspiros, macarons e brownies.",
+      "Nesse caminho, já atendeu mais de 2.000 festas, preparando cada encomenda de forma artesanal.",
+      "Nossa missão é oferecer atendimento de excelência e encantar os convidados por meio de doces artesanais."
+    ],
+    "tema": {
+      "nome": "natal",
+      "rosa": "#D91F35",
+      "bebe": "#F7CFD0",
+      "lilas": "#1B6E45",
+      "menta": "#D3EBD8",
+      "creme": "#FFF6F3",
+      "ameixa": "#9E1B28",
+      "suave": "#B14751",
+      "linha": "#F2C4C6",
+      "ameixaRgb": "158,27,40",
+      "rodapeTexto": "#FBE7E8",
+      "realceSuave": "#FCECEC"
+    },
+    "catalogo": {
+      "id": "natal-2026",
+      "slug": "natal-2026",
+      "nome": "Natal 2026",
+      "descricao": "Presentes, sobremesas e delícias para a sua ceia.",
+      "capa": "",
+      "status": "publicado",
+      "inicio": "",
+      "fimPedidos": "2026-12-24",
+      "retiradaInicio": "2026-12-20",
+      "retiradaFim": "2026-12-25"
+    },
+    "versao": "2026-11-05.1"
+  },
+  "categories": [
+    {
+      "id": "presentes",
+      "name": "Presentes de Natal",
+      "description": ""
+    },
+    {
+      "id": "sobremesas",
+      "name": "Sobremesas Natalinas",
+      "description": "Todas as sobremesas com 20 cm de diâmetro: serve 16 porções generosas."
+    },
+    {
+      "id": "ceia",
+      "name": "Delícias para sua Ceia",
+      "description": ""
+    }
+  ],
+  "colors": [
+    {
+      "name": "Rosa",
+      "hex": "#F48FB1",
+      "consult": false
+    },
+    {
+      "name": "Azul",
+      "hex": "#4A90D9",
+      "consult": false
+    },
+    {
+      "name": "Verde",
+      "hex": "#5DBB63",
+      "consult": false
+    },
+    {
+      "name": "Amarelo",
+      "hex": "#F7D54A",
+      "consult": false
+    },
+    {
+      "name": "Lilás",
+      "hex": "#B57EDC",
+      "consult": false
+    },
+    {
+      "name": "Vermelho",
+      "hex": "#D64545",
+      "consult": false
+    },
+    {
+      "name": "Branco",
+      "hex": "#FFFFFF",
+      "consult": false
+    },
+    {
+      "name": "Laranja",
+      "hex": "#F5923E",
+      "consult": false
+    },
+    {
+      "name": "Preto",
+      "hex": "#222222",
+      "consult": false
+    },
+    {
+      "name": "Dourado",
+      "hex": "#D4AF37",
+      "consult": true
+    },
+    {
+      "name": "Prateado",
+      "hex": "#C0C0C0",
+      "consult": true
+    }
+  ],
+  "themes": [
+    "Arco-íris",
+    "Jardim encantado",
+    "Borboletas",
+    "Flores",
+    "Ursinhos",
+    "Safari",
+    "Fundo do mar",
+    "Patrulha Canina",
+    "Stitch",
+    "Casa da Gabby",
+    "Princesas",
+    "Minnie",
+    "Dinossauros"
+  ],
+  "products": [
+    {
+      "id": "natal-mini-suspiros",
+      "category": "presentes",
+      "name": "Mini Suspiros",
+      "description": "Mini suspiros sabor baunilha com embalagem presenteável.",
+      "price": 6,
+      "priceUnit": "por embalagem",
+      "unit": [
+        "embalagem",
+        "embalagens"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [
+        "natal-mini-suspiros.jpg",
+        "natal-mini-suspiros-2.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-brownietone",
+      "category": "presentes",
+      "name": "Brownietone",
+      "description": "Delicioso panetone de brownie com recheio cremoso de brigadeiro ao leite. Acompanha embalagem presenteável.",
+      "price": 17,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": "200 g",
+      "images": [
+        "natal-brownietone.jpg",
+        "natal-brownietone-2.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-papai-noel-suspiro",
+      "category": "presentes",
+      "name": "Papai Noel de Suspiro",
+      "description": "Recheado de Nutella.",
+      "price": 12,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [
+        "natal-papai-noel-suspiro.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-papai-noel-arvore",
+      "category": "presentes",
+      "name": "Papai Noel e Árvore de Natal",
+      "description": "Recheados de Nutella. Em uma caixinha linda e presenteável.",
+      "price": 20,
+      "priceUnit": "por caixinha",
+      "unit": [
+        "caixinha",
+        "caixinhas"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [
+        "natal-papai-noel-arvore.jpg",
+        "natal-papai-noel-arvore-2.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-arvore-bombom-brownie",
+      "category": "presentes",
+      "name": "Árvore de Natal Bombom de Brownie",
+      "description": "Árvore de Natal de brownie recheada de doce de leite e banhada de chocolate ao leite. Acompanha uma linda caixa presenteável.",
+      "price": 13,
+      "priceUnit": "por unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [
+        "natal-arvore-bombom-brownie.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-caixa-premium",
+      "category": "presentes",
+      "name": "Caixa Premium Natalina",
+      "description": "Uma caixa Premium presenteável com um Brownietone, uma caixa com dois macarons e um Papai Noel de suspiros.",
+      "price": 56,
+      "priceUnit": "por caixa",
+      "unit": [
+        "caixa",
+        "caixas"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [
+        "natal-caixa-premium.jpg",
+        "natal-caixa-premium-2.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-torta-chocolatuda",
+      "category": "sobremesas",
+      "name": "Torta Chocolatuda",
+      "description": "Bolo de chocolate com recheio de brigadeiro cremoso.",
+      "price": 120,
+      "priceUnit": "por torta",
+      "unit": [
+        "torta",
+        "tortas"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": "20 cm de diâmetro · serve 16 porções",
+      "images": [
+        "natal-torta-chocolatuda.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-torta-brownie",
+      "category": "sobremesas",
+      "name": "Torta Brownie",
+      "description": "Massa de brownie com recheio duplo de brigadeiro branco e finalizada com brigadeiro ao leite.",
+      "price": 140,
+      "priceUnit": "por torta",
+      "unit": [
+        "torta",
+        "tortas"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": "20 cm de diâmetro · serve 16 porções",
+      "images": [],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-bolo-gelado-coco",
+      "category": "sobremesas",
+      "name": "Bolo Gelado de Coco",
+      "description": "Bolo de massa branca molhadinho com recheio de beijinho bem cremoso.",
+      "price": 150,
+      "priceUnit": "por bolo",
+      "unit": [
+        "bolo",
+        "bolos"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": "20 cm de diâmetro · serve 16 porções",
+      "images": [
+        "natal-bolo-gelado-coco.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-bolo-gelado-chocomousse",
+      "category": "sobremesas",
+      "name": "Bolo Gelado Chocomousse",
+      "description": "Bolo de cacau black com duplo recheio: brigadeiro ao leite e mousse de chocolate.",
+      "price": 150,
+      "priceUnit": "por bolo",
+      "unit": [
+        "bolo",
+        "bolos"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": "20 cm de diâmetro · serve 16 porções",
+      "images": [
+        "natal-bolo-gelado-chocomousse.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-quiche",
+      "category": "ceia",
+      "name": "Quiche",
+      "description": "Quiche de 20 cm de diâmetro.",
+      "price": 130,
+      "priceUnit": "por quiche",
+      "unit": [
+        "quiche",
+        "quiches"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": "20 cm de diâmetro",
+      "images": [
+        "natal-quiche.jpg"
+      ],
+      "badge": null,
+      "flavors": [
+        "Alho-poró",
+        "3 Queijos"
+      ],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-rabanadas-tradicionais",
+      "category": "ceia",
+      "name": "Rabanadas Tradicionais",
+      "description": "Molhadinhas e super saborosas!",
+      "price": 6.5,
+      "priceUnit": "a unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [
+        "natal-rabanadas-tradicionais.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
+      "id": "natal-rabanadas-recheadas",
+      "category": "ceia",
+      "name": "Rabanadas Recheadas",
+      "description": "Rabanadas com recheio à sua escolha.",
+      "price": 8,
+      "priceUnit": "a unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [
+        "natal-rabanadas-recheadas.jpg"
+      ],
+      "badge": null,
+      "flavors": [
+        "Doce de Leite",
+        "Brigadeiro ao Leite",
+        "Ninho com Nutella",
+        "Kinder Bueno"
+      ],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    }
+  ]
+}
