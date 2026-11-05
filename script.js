@@ -16,7 +16,7 @@
   const CART_BASE = 'delicias-da-jac:carrinho:v1';
   // Um carrinho por catálogo (decisão de 2026-10-23): o Tradicional continua com a chave de sempre.
   const cartKeyOf = (id) => (id && id !== 'tradicional' ? `${CART_BASE}:${id}` : CART_BASE);
-  const OTHER_COLOR = 'Outro';
+
   const OTHER_THEME = 'Outros';
   const SPECIAL_COLOR_RE = /neon|dourad|pratead/; // cores que exigem orçamento (texto digitado em "Outro")
 
@@ -62,7 +62,6 @@
       notes: [...new Set([...(p.notes || []), ...(v.notes || [])])],
     };
   }
-  const colorLimit = (c) => (c.maxColors === 'free' ? Infinity : c.maxColors || 1);
   const unitName = (p, n) => (n === 1 ? p.unit[0] : p.unit[1]);
   const qtyText = (p, n) => (p.gramsPerUnit ? `${n * p.gramsPerUnit} g (${n} ${unitName(p, n)})` : `${n} ${unitName(p, n)}`);
 
@@ -81,7 +80,7 @@
 
   function optionsHint(c) {
     const a = [];
-    if (c.colors.length) a.push(colorLimit(c) === 1 ? 'cor' : 'cores');
+    if (c.colors.length) a.push('cor');
     if (c.themes.length) a.push('tema');
     if (c.flavorMode === 'one') a.push('recheio');
     if (c.flavorMode === 'many') a.push('sabores');
@@ -355,7 +354,8 @@
       const found = variantsOf(p).findIndex((x) => x.label === item.vlabel);
       d.vi = found >= 0 ? found : 0;
       d.qty = item.qty;
-      d.colors = item.colors.map((c) => ({ ...c }));
+      // Cor é texto livre; um item antigo do carrinho, com várias cores escolhidas, vira um texto só ao ser editado.
+      d.colors = item.colors.length ? [{ name: item.colors.map((c) => c.name).join(', '), custom: true, hex: '' }] : [];
       d.theme = item.themeCustom ? OTHER_THEME : item.theme;
       d.themeText = item.themeCustom ? item.theme : '';
       d.flavors = [...item.flavors];
@@ -377,29 +377,19 @@
     dlg.showModal();
   }
 
-  function swatchHTML(name, hex, consult) {
-    const dot = hex ? `background:${esc(hex)}` : 'background:conic-gradient(#F48FB1,#F7D54A,#5DBB63,#4A90D9,#B57EDC,#F48FB1)';
-    return `<button type="button" class="swatch" data-color="${esc(name)}" aria-pressed="false"><span class="dot" style="${dot}"></span>`
-      + `<span class="sw-name">${esc(name)}</span>${consult ? '<small>sob consulta</small>' : ''}</button>`;
-  }
-
   function buildModal(focusSel) {
     const d = draft, { p, v, c } = ctx(d);
     const names = imagesOf(p);
     const thumbs = names.length > 1
       ? `<div class="m-thumbs">${names.map((n, i) => `<button type="button" data-thumb="${i}" aria-label="Foto ${i + 1} de ${names.length}"${i === d.img ? ' aria-current="true"' : ''}><img src="${IMG_DIR + encodeURIComponent(n)}" alt="" data-fb data-name="${esc(p.name)}" loading="lazy"></button>`).join('')}</div>`
       : '';
-    const lim = colorLimit(c);
+    // Cor em texto livre (pedido da confeitaria: reduz a expectativa de uma cor exata). A confirmação é da confeitaria.
     const colorsBox = c.colors.length ? `
-      <fieldset class="fs" id="m-colors"><legend>${lim === 1 ? 'Cor' : 'Cores'}</legend>
-        <p class="hint">${lim === 1 ? 'Escolha 1 cor.' : lim === Infinity ? 'Você pode escolher mais de uma cor.' : `Escolha até ${lim} cores.`}</p>
-        <div class="swatches">${c.colors.map((n) => swatchHTML(n, COLORS[n] && COLORS[n].hex, COLORS[n] && COLORS[n].consult)).join('')}${swatchHTML(OTHER_COLOR, null, false)}</div>
-        <div class="other-color" id="m-other-color" hidden>
-          <label class="f grow"><span>Qual cor?</span><input type="text" id="m-oc-name" maxlength="40" autocomplete="off" placeholder="Ex.: verde-água"></label>
-          <label class="f"><span>Escolher visualmente</span><input type="color" id="m-oc-hex" value="#f48fb1" aria-label="Seletor visual de cor"></label>
-        </div>
+      <div class="fs" id="m-colors">
+        <label class="f"><span>Cor desejada</span><input type="text" id="m-color-text" maxlength="100" autocomplete="off" placeholder="Ex.: rosa e branco" value="${esc((d.colors[0] && d.colors[0].name) || '')}"></label>
+        <p class="hint">Escreva a cor ou as cores que você gostaria. A confeitaria confirma o que é possível.</p>
         <p class="hint warn" id="m-consult" hidden>Dourado, prateado e neon podem exigir orçamento específico. O preço desse item será confirmado pela confeitaria.</p>
-      </fieldset>` : '';
+      </div>` : '';
     const themeBox = c.themes.length ? `
       <div class="fs" id="m-theme-box">
         <label class="f"><span>Tema</span><select id="m-theme"><option value="">Escolha um tema</option>${c.themes.map((t) => `<option${t === d.theme ? ' selected' : ''}>${esc(t)}</option>`).join('')}<option${d.theme === OTHER_THEME ? ' selected' : ''}>${OTHER_THEME}</option></select></label>
@@ -447,8 +437,6 @@
         <button type="button" class="btn" id="m-confirm">${d.editUid ? 'Salvar alterações' : 'Confirmar e adicionar'}</button></div>`;
     // valores iniciais dos campos
     $$('input[name="flavor"]', dlg).forEach((i) => { i.checked = d.flavors.includes(i.value); });
-    const oc = d.colors.find((x) => x.custom);
-    if (oc) { $('#m-oc-name').value = oc.name; if (oc.hex) $('#m-oc-hex').value = oc.hex; }
     setQtyInput();
     syncModal();
     if (focusSel) { const el = $(focusSel, dlg); if (el) el.focus(); }
@@ -465,11 +453,7 @@
   function validate(d) {
     const { p, v, c } = ctx(d), errs = [], n = d.colors.length;
     if (c.colors.length) {
-      const lim = colorLimit(c);
-      if (!n) errs.push(['m-colors', 'Escolha pelo menos uma cor.']);
-      else if (n > lim) errs.push(['m-colors', `Escolha no máximo ${lim} ${plural(lim, 'cor', 'cores')}.`]);
-      const other = d.colors.find((x) => x.custom);
-      if (other && !other.name.trim()) errs.push(['m-oc-name', 'Informe o nome da cor escolhida em "Outro".']);
+      if (!n || !d.colors[0].name.trim()) errs.push(['m-color-text', 'Escreva a cor desejada.']);
     }
     if (c.themes.length) {
       if (!d.theme) errs.push(['m-theme', 'Escolha um tema.']);
@@ -490,11 +474,6 @@
 
   function syncModal() {
     const d = draft, { p, c } = ctx(d), r = validate(d);
-    $$('[data-color]', dlg).forEach((b) => {
-      const on = b.dataset.color === OTHER_COLOR ? d.colors.some((x) => x.custom) : d.colors.some((x) => !x.custom && x.name === b.dataset.color);
-      b.setAttribute('aria-pressed', String(on));
-    });
-    if ($('#m-other-color')) $('#m-other-color').hidden = !d.colors.some((x) => x.custom);
     if ($('#m-consult')) $('#m-consult').hidden = !r.consult.length;
     if ($('#m-theme-other')) $('#m-theme-other').hidden = d.theme !== OTHER_THEME;
     if (c.flavorMode === 'many' && c.maxFlavors) {
@@ -556,17 +535,6 @@
     toast(editing ? 'Alterações salvas.' : `${name} adicionado ao carrinho.`, editing ? null : { label: 'Ver carrinho', fn: openCart });
   }
 
-  function toggleColor(name) {
-    const d = draft, { c } = ctx(d), lim = colorLimit(c);
-    const idx = d.colors.findIndex((x) => (name === OTHER_COLOR ? x.custom : !x.custom && x.name === name));
-    if (idx >= 0) { d.colors.splice(idx, 1); return true; }
-    const item = name === OTHER_COLOR ? { name: '', custom: true, hex: '' } : { name, custom: false, hex: '' };
-    if (lim === 1) d.colors = [item];
-    else if (d.colors.length >= lim) { toast(`Você pode escolher até ${lim} cores. Desmarque uma para trocar.`); return false; }
-    else d.colors.push(item);
-    return true;
-  }
-
   // Ao mudar variação/cores o mínimo pode mudar: se a quantidade estava no mínimo antigo, acompanha o novo.
   function withMinFollow(fn) {
     const { p, c } = ctx(draft), before = minEff(p, c, draft.colors.length), was = draft.qty === before;
@@ -579,8 +547,6 @@
 
   function onModalClick(e) {
     const t = e.target;
-    const sw = t.closest('[data-color]');
-    if (sw) return withMinFollow(() => toggleColor(sw.dataset.color));
     const th = t.closest('[data-thumb]');
     if (th) { draft.img = Number(th.dataset.thumb); return buildModal(`[data-thumb="${draft.img}"]`); }
     const act = t.closest('[data-act]');
@@ -619,10 +585,8 @@
       syncModal();
     } else if (t.id === 'm-note') d.note = t.value;
     else if (t.id === 'm-theme-text') { d.themeText = t.value; syncModal(); }
-    else if (t.id === 'm-oc-name' || t.id === 'm-oc-hex') {
-      const oc = d.colors.find((x) => x.custom); if (!oc) return;
-      if (t.id === 'm-oc-name') oc.name = t.value;
-      else { oc.hex = t.value; if (!oc.name.trim()) { oc.name = t.value; $('#m-oc-name').value = t.value; } }
+    else if (t.id === 'm-color-text') {
+      d.colors = t.value.trim() ? [{ name: t.value, custom: true, hex: '' }] : [];
       syncModal();
     }
   }
