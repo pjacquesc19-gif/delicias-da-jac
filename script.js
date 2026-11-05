@@ -122,7 +122,6 @@
     const st = seasonState();
     el.innerHTML = `<div class="wrap"><p class="sb-kicker">Catálogo especial</p><h2>${esc(c.nome)}</h2>`
       + (c.descricao ? `<p>${esc(c.descricao)}</p>` : '')
-      + (st.archived ? '' : (seasonDates(c) ? `<p class="sb-dates">${esc(seasonDates(c))}</p>` : ''))
       + (st.open ? '' : `<p class="sb-closed" role="status"><strong>${esc(st.archived ? st.msg : 'Encomendas encerradas.')}</strong>${st.archived ? '' : ' ' + esc(st.msg)}</p>`)
       // O link para o Tradicional só aparece quando este catálogo não aceita mais pedidos (senão a cliente ficaria sem saída).
       + (st.open ? '' : '<p><a class="btn ghost" href="./">Ver o catálogo tradicional</a></p>') + '</div>';
@@ -288,7 +287,7 @@
         <h3>${esc(p.name)}</h3>
         <p class="desc">${esc(p.description)}</p>
         <div class="price-row"><strong class="price">${brl(v.price)}</strong><span class="unit">${esc(p.priceUnit)}</span></div>
-        <p class="min">${mt ? 'Pedido mínimo: ' + esc(mt) : 'Pedido mínimo: não informado'}</p>
+        ${mt ? `<p class="min">Pedido mínimo: ${esc(mt)}</p>` : ''}
         ${meta ? `<p class="meta">${esc(meta)}</p>` : ''}
         ${fixed}
         ${selectorsHTML(p, s.vi)}
@@ -415,7 +414,7 @@
         <div class="m-info">
           <h3>${esc(p.name)}</h3>
           <p class="m-price"><strong id="m-unit">${brl(v.price)}</strong> <span>${esc(p.priceUnit)}</span></p>
-          <p class="m-min">${minText(p, c) ? 'Pedido mínimo: ' + esc(minText(p, c)) : 'Pedido mínimo: não informado'}</p>
+          ${minText(p, c) ? `<p class="m-min">Pedido mínimo: ${esc(minText(p, c))}</p>` : ''}
           <p class="m-desc">${esc(p.description)}</p>
         </div>
       </div>
