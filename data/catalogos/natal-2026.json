@@ -39,7 +39,7 @@
       "retiradaInicio": "2026-12-20",
       "retiradaFim": "2026-12-25"
     },
-    "versao": "2026-11-05.1"
+    "versao": "2026-11-05.2"
   },
   "categories": [
     {
@@ -444,6 +444,37 @@
       "variants": []
     },
     {
+      "id": "natal-rabanadas-tradicionais",
+      "category": "ceia",
+      "name": "Rabanadas Tradicionais",
+      "description": "Molhadinhas e super saborosas!",
+      "price": 6.5,
+      "priceUnit": "a unidade",
+      "unit": [
+        "unidade",
+        "unidades"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [
+        "natal-rabanadas-tradicionais.jpg"
+      ],
+      "badge": null,
+      "flavors": [],
+      "flavorChoice": "one",
+      "minPerColor": null,
+      "colors": [],
+      "maxColors": 1,
+      "themes": [],
+      "customizable": false,
+      "notes": [],
+      "featured": false,
+      "available": true,
+      "selectors": [],
+      "variants": []
+    },
+    {
       "id": "natal-quiche",
       "category": "ceia",
       "name": "Quiche",
@@ -465,37 +496,6 @@
         "Alho-poró",
         "3 Queijos"
       ],
-      "flavorChoice": "one",
-      "minPerColor": null,
-      "colors": [],
-      "maxColors": 1,
-      "themes": [],
-      "customizable": false,
-      "notes": [],
-      "featured": false,
-      "available": true,
-      "selectors": [],
-      "variants": []
-    },
-    {
-      "id": "natal-rabanadas-tradicionais",
-      "category": "ceia",
-      "name": "Rabanadas Tradicionais",
-      "description": "Molhadinhas e super saborosas!",
-      "price": 6.5,
-      "priceUnit": "a unidade",
-      "unit": [
-        "unidade",
-        "unidades"
-      ],
-      "gramsPerUnit": null,
-      "minimumQuantity": null,
-      "quantity": null,
-      "images": [
-        "natal-rabanadas-tradicionais.jpg"
-      ],
-      "badge": null,
-      "flavors": [],
       "flavorChoice": "one",
       "minPerColor": null,
       "colors": [],
