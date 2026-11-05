@@ -1,6 +1,8 @@
 (() => {
   'use strict';
 
+  if (document.documentElement.hidden) return;   // página principal vazia: não carrega catálogo nem carrinho (ver index.html)
+
   /* =====================================================================
      Configuração. Caminhos relativos, para funcionar no GitHub Pages
      mesmo quando o site está em um subdiretório (usuario.github.io/repo/).
@@ -93,6 +95,8 @@
      O servidor das encomendas confere as mesmas regras com o arquivo publicado.
      ===================================================================== */
   const season = () => (DATA && DATA.meta && DATA.meta.catalogo) || null;
+  // A abertura (frase e foto) é só do catálogo principal; nos sazonais, some antes de a página aparecer.
+  if (PAGE_CATALOG) { const hero = $('.hero'); if (hero) hero.hidden = true; }
   const catalogId = () => (season() && season().id) || PAGE_CATALOG || '';
   function seasonState() {
     const c = season();
@@ -118,13 +122,14 @@
     let el = $('#season-banner');
     if (!c) { if (el) el.remove(); return; }
     document.title = `${c.nome} · ${DATA.meta.brand}`;
+    const hero = $('.hero'); if (hero) hero.hidden = true;   // também na prévia do painel, que não tem a marcação da página
     if (!el) { el = document.createElement('section'); el.id = 'season-banner'; el.className = 'season-banner'; $('main').prepend(el); }
     const st = seasonState();
     el.innerHTML = `<div class="wrap"><p class="sb-kicker">Catálogo especial</p><h2>${esc(c.nome)}</h2>`
       + (c.descricao ? `<p>${esc(c.descricao)}</p>` : '')
       + (st.open ? '' : `<p class="sb-closed" role="status"><strong>${esc(st.archived ? st.msg : 'Encomendas encerradas.')}</strong>${st.archived ? '' : ' ' + esc(st.msg)}</p>`)
       // O link para o Tradicional só aparece quando este catálogo não aceita mais pedidos (senão a cliente ficaria sem saída).
-      + (st.open ? '' : '<p><a class="btn ghost" href="./">Ver o catálogo tradicional</a></p>') + '</div>';
+      + (st.open || window.DJ_PRINCIPAL_VAZIA ? '' : '<p><a class="btn ghost" href="./">Ver o catálogo tradicional</a></p>') + '</div>';
     // Arquivado: o endereço continua existindo (links divulgados), mas sem produtos.
     $('#catalogo').hidden = !!st.archived;
     $('#catalog').closest('section').hidden = !!st.archived;
