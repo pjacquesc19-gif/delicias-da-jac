@@ -12,22 +12,7 @@
       "Renata Jacques, proprietária da Delícias da Jac, é psicóloga e se dedica à confeitaria há aproximadamente cinco anos. Hoje é especializada em suspiros, macarons e brownies.",
       "Nesse caminho, já atendeu mais de 2.000 festas, preparando cada encomenda de forma artesanal.",
       "Nossa missão é oferecer atendimento de excelência e encantar os convidados por meio de doces artesanais."
-    ],
-    "tema": {
-      "nome": "natal",
-      "rosa": "#D62839",
-      "bebe": "#F7DCDC",
-      "lilas": "#1E7B4F",
-      "menta": "#CFE8D6",
-      "creme": "#FFFAF4",
-      "ameixa": "#4A1A1F",
-      "suave": "#6E474A",
-      "linha": "#EDD0D1",
-      "ameixaRgb": "74,26,31",
-      "rodapeTexto": "#FBEEEE",
-      "realceSuave": "#FCF1F1"
-    },
-    "versao": "2026-10-23.2"
+    ]
   },
   "categories": [
     {
@@ -145,42 +130,162 @@
   ],
   "products": [
     {
-      "id": "lombriga-moribunda",
+      "id": "macaron-individual",
       "category": "macarons",
-      "name": "Lombriga Moribunda",
-      "description": "O melhor que a cidade de Ratanambá pode oferecer",
-      "price": 100000,
-      "priceUnit": "por grama",
+      "name": "Macaron individual",
+      "description": "Macaron com sabores à escolha. Mínimo de 20 unidades da mesma cor.",
+      "price": 6.0,
+      "priceUnit": "por unidade",
       "unit": [
-        "unidade",
-        "unidades"
+        "macaron",
+        "macarons"
       ],
-      "gramsPerUnit": 1000,
-      "minimumQuantity": null,
-      "quantity": "1 m",
+      "gramsPerUnit": null,
+      "minimumQuantity": 20,
+      "quantity": "1 unidade",
       "images": [
-        "lombriga-moribunda-eeae0ed80b.webp",
-        "lombriga-moribunda-010bae9afd.webp"
+        "macaron-individual.png"
       ],
-      "badge": "Preferido das clientes",
+      "badge": null,
       "flavors": [
-        "Sangue",
-        "Bala Fini",
-        "Asteroide"
+        "Brigadeiro",
+        "Brigadeiro branco",
+        "Limão-siciliano",
+        "Maracujá",
+        "Caramelo",
+        "Ninho com Nutella",
+        "Pistache",
+        "Nozes"
       ],
-      "flavorChoice": "one",
-      "minPerColor": null,
+      "flavorChoice": "many",
+      "minPerColor": 20,
       "colors": [
-        "Preto"
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
       ],
-      "maxColors": 1,
+      "maxColors": "free",
       "themes": [],
       "customizable": true,
-      "notes": [],
+      "notes": [
+        "Mínimo 20 da mesma cor",
+        "Cores especiais (neon, dourado e prateado): preço sob consulta"
+      ],
       "featured": true,
       "available": true,
       "selectors": [],
       "variants": []
+    },
+    {
+      "id": "macaron-caixinha",
+      "category": "macarons",
+      "name": "Caixinha presenteável de macarons",
+      "description": "Caixinha com 1, 2 ou 3 macarons, com fita e tag.",
+      "price": null,
+      "priceUnit": "por caixinha",
+      "unit": [
+        "caixinha",
+        "caixinhas"
+      ],
+      "gramsPerUnit": null,
+      "minimumQuantity": null,
+      "quantity": null,
+      "images": [
+        "macaron-caixinha.png"
+      ],
+      "badge": null,
+      "flavors": [
+        "Brigadeiro",
+        "Brigadeiro branco",
+        "Limão-siciliano",
+        "Maracujá",
+        "Caramelo",
+        "Ninho com Nutella",
+        "Pistache",
+        "Nozes"
+      ],
+      "flavorChoice": "many",
+      "minPerColor": null,
+      "colors": [
+        "Rosa",
+        "Azul",
+        "Verde",
+        "Amarelo",
+        "Lilás",
+        "Vermelho",
+        "Branco",
+        "Laranja",
+        "Preto",
+        "Dourado",
+        "Prateado"
+      ],
+      "maxColors": "free",
+      "themes": [],
+      "customizable": true,
+      "notes": [
+        "Fita e tag",
+        "Cores especiais (neon, dourado e prateado): preço sob consulta"
+      ],
+      "featured": false,
+      "available": true,
+      "selectors": [
+        {
+          "key": "macarons-na-caixinha",
+          "label": "Macarons na caixinha"
+        }
+      ],
+      "variants": [
+        {
+          "label": "Caixinha com 1 macaron",
+          "options": {
+            "macarons-na-caixinha": "1 macaron"
+          },
+          "price": 8.0,
+          "minimumQuantity": null,
+          "quantity": "1 macaron",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Caixinha com 2 macarons",
+          "options": {
+            "macarons-na-caixinha": "2 macarons"
+          },
+          "price": 15.0,
+          "minimumQuantity": null,
+          "quantity": "2 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        },
+        {
+          "label": "Caixinha com 3 macarons",
+          "options": {
+            "macarons-na-caixinha": "3 macarons"
+          },
+          "price": 22.0,
+          "minimumQuantity": null,
+          "quantity": "3 macarons",
+          "maxFlavors": null,
+          "maxColors": null,
+          "flavors": null,
+          "themes": null,
+          "notes": []
+        }
+      ]
     },
     {
       "id": "macaron-torre",
@@ -250,7 +355,7 @@
             "tamanho": "4 andares",
             "suporte": "Sem torre"
           },
-          "price": 240,
+          "price": 240.0,
           "minimumQuantity": null,
           "quantity": "40 macarons",
           "maxFlavors": 2,
@@ -267,7 +372,7 @@
             "tamanho": "4 andares",
             "suporte": "Com torre"
           },
-          "price": 274,
+          "price": 274.0,
           "minimumQuantity": null,
           "quantity": "40 macarons",
           "maxFlavors": 2,
@@ -284,7 +389,7 @@
             "tamanho": "5 andares",
             "suporte": "Sem torre"
           },
-          "price": 360,
+          "price": 360.0,
           "minimumQuantity": null,
           "quantity": "60 macarons",
           "maxFlavors": 3,
@@ -301,7 +406,7 @@
             "tamanho": "5 andares",
             "suporte": "Com torre"
           },
-          "price": 395,
+          "price": 395.0,
           "minimumQuantity": null,
           "quantity": "60 macarons",
           "maxFlavors": 3,
@@ -318,7 +423,7 @@
             "tamanho": "6 andares",
             "suporte": "Sem torre"
           },
-          "price": 480,
+          "price": 480.0,
           "minimumQuantity": null,
           "quantity": "80 macarons",
           "maxFlavors": 3,
@@ -335,7 +440,7 @@
             "tamanho": "6 andares",
             "suporte": "Com torre"
           },
-          "price": 540,
+          "price": 540.0,
           "minimumQuantity": null,
           "quantity": "80 macarons",
           "maxFlavors": 3,
@@ -352,7 +457,7 @@
             "tamanho": "7 andares",
             "suporte": "Sem torre"
           },
-          "price": 600,
+          "price": 600.0,
           "minimumQuantity": null,
           "quantity": "100 macarons",
           "maxFlavors": null,
@@ -369,7 +474,7 @@
             "tamanho": "7 andares",
             "suporte": "Com torre"
           },
-          "price": 680,
+          "price": 680.0,
           "minimumQuantity": null,
           "quantity": "100 macarons",
           "maxFlavors": null,
@@ -386,7 +491,7 @@
             "tamanho": "8 andares",
             "suporte": "Sem torre"
           },
-          "price": 780,
+          "price": 780.0,
           "minimumQuantity": null,
           "quantity": "130 macarons",
           "maxFlavors": null,
@@ -403,7 +508,7 @@
             "tamanho": "8 andares",
             "suporte": "Com torre"
           },
-          "price": 880,
+          "price": 880.0,
           "minimumQuantity": null,
           "quantity": "130 macarons",
           "maxFlavors": null,
@@ -420,7 +525,7 @@
             "tamanho": "10 andares",
             "suporte": "Sem torre"
           },
-          "price": 1100,
+          "price": 1100.0,
           "minimumQuantity": null,
           "quantity": "200 macarons",
           "maxFlavors": null,
@@ -437,7 +542,7 @@
             "tamanho": "10 andares",
             "suporte": "Com torre"
           },
-          "price": 1200,
+          "price": 1200.0,
           "minimumQuantity": null,
           "quantity": "200 macarons",
           "maxFlavors": null,
@@ -449,165 +554,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "macaron-caixinha",
-      "category": "macarons",
-      "name": "Caixinha presenteável de macarons",
-      "description": "Caixinha com 1, 2 ou 3 macarons, com fita e tag.",
-      "price": null,
-      "priceUnit": "por caixinha",
-      "unit": [
-        "caixinha",
-        "caixinhas"
-      ],
-      "gramsPerUnit": null,
-      "minimumQuantity": null,
-      "quantity": null,
-      "images": [
-        "macaron-caixinha.png"
-      ],
-      "badge": null,
-      "flavors": [
-        "Brigadeiro",
-        "Brigadeiro branco",
-        "Limão-siciliano",
-        "Maracujá",
-        "Caramelo",
-        "Ninho com Nutella",
-        "Pistache",
-        "Nozes"
-      ],
-      "flavorChoice": "many",
-      "minPerColor": null,
-      "colors": [
-        "Rosa",
-        "Azul",
-        "Verde",
-        "Amarelo",
-        "Lilás",
-        "Vermelho",
-        "Branco",
-        "Laranja",
-        "Preto",
-        "Dourado",
-        "Prateado"
-      ],
-      "maxColors": "free",
-      "themes": [],
-      "customizable": true,
-      "notes": [
-        "Fita e tag",
-        "Cores especiais (neon, dourado e prateado): preço sob consulta"
-      ],
-      "featured": false,
-      "available": true,
-      "selectors": [
-        {
-          "key": "macarons-na-caixinha",
-          "label": "Macarons na caixinha"
-        }
-      ],
-      "variants": [
-        {
-          "label": "Caixinha com 1 macaron",
-          "options": {
-            "macarons-na-caixinha": "1 macaron"
-          },
-          "price": 8,
-          "minimumQuantity": null,
-          "quantity": "1 macaron",
-          "maxFlavors": null,
-          "maxColors": null,
-          "flavors": null,
-          "themes": null,
-          "notes": []
-        },
-        {
-          "label": "Caixinha com 2 macarons",
-          "options": {
-            "macarons-na-caixinha": "2 macarons"
-          },
-          "price": 15,
-          "minimumQuantity": null,
-          "quantity": "2 macarons",
-          "maxFlavors": null,
-          "maxColors": null,
-          "flavors": null,
-          "themes": null,
-          "notes": []
-        },
-        {
-          "label": "Caixinha com 3 macarons",
-          "options": {
-            "macarons-na-caixinha": "3 macarons"
-          },
-          "price": 22,
-          "minimumQuantity": null,
-          "quantity": "3 macarons",
-          "maxFlavors": null,
-          "maxColors": null,
-          "flavors": null,
-          "themes": null,
-          "notes": []
-        }
-      ]
-    },
-    {
-      "id": "macaron-individual",
-      "category": "macarons",
-      "name": "Macaron individual",
-      "description": "Macaron com sabores à escolha. Mínimo de 20 unidades da mesma cor.",
-      "price": 60,
-      "priceUnit": "por unidade",
-      "unit": [
-        "macaron",
-        "macarons"
-      ],
-      "gramsPerUnit": null,
-      "minimumQuantity": 20,
-      "quantity": "1 unidade",
-      "images": [
-        "macaron-individual-4052c2a209.webp",
-        "macaron-individual.png"
-      ],
-      "badge": null,
-      "flavors": [
-        "Brigadeiro",
-        "Brigadeiro branco",
-        "Limão-siciliano",
-        "Maracujá",
-        "Caramelo",
-        "Ninho com Nutella",
-        "Pistache",
-        "Nozes"
-      ],
-      "flavorChoice": "many",
-      "minPerColor": 20,
-      "colors": [
-        "Rosa",
-        "Azul",
-        "Verde",
-        "Amarelo",
-        "Lilás",
-        "Vermelho",
-        "Branco",
-        "Laranja",
-        "Preto",
-        "Dourado",
-        "Prateado"
-      ],
-      "maxColors": "free",
-      "themes": [],
-      "customizable": true,
-      "notes": [
-        "Mínimo 20 da mesma cor",
-        "Cores especiais (neon, dourado e prateado): preço sob consulta"
-      ],
-      "featured": true,
-      "available": true,
-      "selectors": [],
-      "variants": []
     },
     {
       "id": "pirulito-simples",
@@ -657,7 +603,7 @@
       "category": "pirulitos",
       "name": "Pirulito modelado simples",
       "description": "Pirulito de suspiro modelado. Temas sob consulta.",
-      "price": 6,
+      "price": 6.0,
       "priceUnit": "por unidade",
       "unit": [
         "unidade",
@@ -776,7 +722,7 @@
       "category": "pirulitos",
       "name": "Pirulito recheado de brigadeiro",
       "description": "Pirulito de suspiro recheado de brigadeiro.",
-      "price": 6,
+      "price": 6.0,
       "priceUnit": "por unidade",
       "unit": [
         "unidade",
@@ -870,7 +816,7 @@
           "options": {
             "embalagem": "Saquinho"
           },
-          "price": 5,
+          "price": 5.0,
           "minimumQuantity": 10,
           "quantity": "15 mini suspiros",
           "maxFlavors": null,
@@ -898,7 +844,7 @@
           "options": {
             "embalagem": "Caixinha"
           },
-          "price": 7,
+          "price": 7.0,
           "minimumQuantity": 10,
           "quantity": "1 unidade",
           "maxFlavors": null,
@@ -979,7 +925,7 @@
           "options": {
             "embalagem": "Caixinha"
           },
-          "price": 7,
+          "price": 7.0,
           "minimumQuantity": 10,
           "quantity": "1 unidade",
           "maxFlavors": null,
@@ -1180,7 +1126,7 @@
           "options": {
             "opcao": "Recheado"
           },
-          "price": 8,
+          "price": 8.0,
           "minimumQuantity": 10,
           "quantity": "1 unidade",
           "maxFlavors": null,
@@ -1264,7 +1210,7 @@
           "options": {
             "embalagem": "Sem caixinha"
           },
-          "price": 10,
+          "price": 10.0,
           "minimumQuantity": 10,
           "quantity": "1 unidade",
           "maxFlavors": null,
@@ -1278,7 +1224,7 @@
           "options": {
             "embalagem": "Com caixinha"
           },
-          "price": 12,
+          "price": 12.0,
           "minimumQuantity": 10,
           "quantity": "1 unidade",
           "maxFlavors": null,
@@ -1355,7 +1301,7 @@
           "options": {
             "versao": "Roseta"
           },
-          "price": 10,
+          "price": 10.0,
           "minimumQuantity": 10,
           "quantity": "1 unidade",
           "maxFlavors": null,
@@ -1369,7 +1315,7 @@
           "options": {
             "versao": "Modelado"
           },
-          "price": 12,
+          "price": 12.0,
           "minimumQuantity": 10,
           "quantity": "1 unidade",
           "maxFlavors": null,
@@ -1383,7 +1329,7 @@
           "options": {
             "versao": "Premium"
           },
-          "price": 14,
+          "price": 14.0,
           "minimumQuantity": 10,
           "quantity": "1 unidade",
           "maxFlavors": null,
@@ -1446,7 +1392,7 @@
           "options": {
             "tamanho": "30 cm"
           },
-          "price": 100,
+          "price": 100.0,
           "minimumQuantity": null,
           "quantity": "30 cm",
           "maxFlavors": null,
@@ -1462,7 +1408,7 @@
           "options": {
             "tamanho": "40 cm"
           },
-          "price": 150,
+          "price": 150.0,
           "minimumQuantity": null,
           "quantity": "40 cm",
           "maxFlavors": null,
@@ -1478,7 +1424,7 @@
       "category": "torres-e-mini-suspiros",
       "name": "Mini suspiros",
       "description": "Mini suspiros vendidos por peso, em pacotes de 250 g (cerca de 100 unidades).",
-      "price": 45,
+      "price": 45.0,
       "priceUnit": "por pacote de 250 g",
       "unit": [
         "pacote de 250 g",
@@ -1554,7 +1500,7 @@
             "tamanho": "4 cm",
             "laco": "Sem laço"
           },
-          "price": 5,
+          "price": 5.0,
           "minimumQuantity": 10,
           "quantity": "1 unidade",
           "maxFlavors": null,
@@ -1584,7 +1530,7 @@
             "tamanho": "5 cm",
             "laco": "Sem laço"
           },
-          "price": 6,
+          "price": 6.0,
           "minimumQuantity": null,
           "quantity": "1 unidade",
           "maxFlavors": null,
@@ -1668,7 +1614,7 @@
           "options": {
             "laco": "Com laço"
           },
-          "price": 6,
+          "price": 6.0,
           "minimumQuantity": 15,
           "quantity": "1 unidade",
           "maxFlavors": null,

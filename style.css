@@ -41,13 +41,11 @@ button{font-family:inherit}
 .hero p{max-width:52ch;font-size:1.1rem;margin:1rem 0 1.5rem}
 .hero-actions{display:flex;gap:.75rem;flex-wrap:wrap}
 
-.story{padding:clamp(2.5rem,6vw,4rem) 0 1.5rem}
-.story-grid{display:grid;gap:2rem;align-items:center}
-.story-text h2{font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1rem}
-.story-text p{margin:0 0 .9rem;max-width:60ch;font-size:1.05rem;color:var(--suave)}
-.story-photo{margin:0;max-width:340px}
-.story-photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:24px;box-shadow:12px 12px 0 var(--menta)}
-@media(min-width:820px){.story-grid.has-photo{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:3.5rem}.story-photo{max-width:none}}
+.hero-grid{display:grid;gap:2rem;align-items:center}
+.hero-photo{margin:0 auto;width:100%;max-width:300px}
+.hero-photo[hidden]{display:none}
+.hero-photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:24px;box-shadow:12px 12px 0 var(--menta)}
+@media(min-width:820px){.hero-grid.has-photo{grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:3.5rem}.hero-photo{max-width:none}}
 
 /* ---------- Botões ---------- */
 .btn{display:inline-block;text-align:center;text-decoration:none;cursor:pointer;border:2px solid var(--ameixa);background:var(--ameixa);color:#fff;padding:.7rem 1.2rem;border-radius:999px;font:700 1rem var(--texto);min-height:44px;transition:background var(--t),color var(--t),transform var(--t)}

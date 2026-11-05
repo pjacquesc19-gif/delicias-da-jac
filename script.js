@@ -10,6 +10,7 @@
   const PAGE_CATALOG = (document.querySelector('meta[name="dj-catalogo"]') || {}).content || '';
   const DATA_URL = PAGE_CATALOG ? `data/catalogos/${PAGE_CATALOG}.json` : 'data/produtos.json';
   const INDEX_URL = 'data/catalogos/index.json';   // catálogos especiais (faixa no topo do catálogo)
+  const SHOW_OTHER_CATALOGS = false;   // por enquanto, um catálogo não sugere os outros: para mostrar a faixa, mude para true
   const IMG_DIR = 'public/images/produtos/';
   const BRAND_DIR = 'public/images/marca/';
   const DEFAULT_IMG = 'public/images/padrao.svg';
@@ -123,7 +124,8 @@
       + (c.descricao ? `<p>${esc(c.descricao)}</p>` : '')
       + (st.archived ? '' : (seasonDates(c) ? `<p class="sb-dates">${esc(seasonDates(c))}</p>` : ''))
       + (st.open ? '' : `<p class="sb-closed" role="status"><strong>${esc(st.archived ? st.msg : 'Encomendas encerradas.')}</strong>${st.archived ? '' : ' ' + esc(st.msg)}</p>`)
-      + '<p><a class="btn ghost" href="./">Ver o catálogo tradicional</a></p></div>';
+      // O link para o Tradicional só aparece quando este catálogo não aceita mais pedidos (senão a cliente ficaria sem saída).
+      + (st.open ? '' : '<p><a class="btn ghost" href="./">Ver o catálogo tradicional</a></p>') + '</div>';
     // Arquivado: o endereço continua existindo (links divulgados), mas sem produtos.
     $('#catalogo').hidden = !!st.archived;
     $('#catalog').closest('section').hidden = !!st.archived;
@@ -1052,13 +1054,13 @@
     // Logomarca oficial: aparece quando o arquivo existe; senão, fica o nome em texto.
     loadBrandImage($('#logo-img'), m.logo, (img) => { img.hidden = false; $('#logo-text').hidden = true; });
     loadBrandImage($('#foot-logo-img'), m.logo, () => { $('#foot-logo').hidden = false; });
-    // Seção "Conheça a Delícias da Jac"
-    if (m.about && m.about.length) {
-      $('#story-body').innerHTML = m.about.map((t) => `<p>${esc(t)}</p>`).join('');
-      const img = $('#story-img');
-      img.alt = `${m.owner || 'Proprietária'}, proprietária da ${m.brand}`;
-      loadBrandImage(img, m.ownerPhoto, () => { $('#story-photo').hidden = false; $('#story-grid').classList.add('has-photo'); });
-    } else $('#historia').hidden = true;
+    // Foto da proprietária no topo da página. Páginas sazonais geradas antes desta mudança ainda têm a seção antiga: fica oculta.
+    const oldStory = $('#historia'); if (oldStory) oldStory.hidden = true;
+    const heroImg = $('#hero-img');
+    if (heroImg) {
+      heroImg.alt = `${m.owner || 'Proprietária'}, proprietária da ${m.brand}`;
+      loadBrandImage(heroImg, m.ownerPhoto, () => { $('#hero-photo').hidden = false; $('#hero-grid').classList.add('has-photo'); });
+    }
   }
 
   /**
@@ -1176,7 +1178,7 @@
     const dropped = loadCart();
     renderSeason();
     renderNav(); renderCatalog(); renderCart();
-    loadCatalogIndex();   // faixa dos outros catálogos (não segura a abertura da página)
+    if (SHOW_OTHER_CATALOGS) loadCatalogIndex();   // faixa dos outros catálogos (não segura a abertura da página)
     // Com o conteúdo já montado: link com #catalogo (ou outra seção) vai ao lugar certo; sem link, topo.
     const anchorOnOpen = () => {
       if (location.hash === '#catalogo') goToCatalog(false);
@@ -1188,7 +1190,8 @@
     if (location.hash.length > 1) {
       let moved = false; const mark = () => { moved = true; };
       ['wheel', 'touchmove', 'keydown'].forEach((t) => window.addEventListener(t, mark, { once: true, passive: true }));
-      $('#story-img').addEventListener('load', () => { if (!moved) setTimeout(anchorOnOpen, 0); }, { once: true });
+      const heroImg = $('#hero-img');
+      if (heroImg) heroImg.addEventListener('load', () => { if (!moved) setTimeout(anchorOnOpen, 0); }, { once: true });
     }
     if (dropped) toast(`${dropped} ${plural(dropped, 'item saiu', 'itens saíram')} do carrinho por não estar${dropped === 1 ? '' : 'em'} mais disponível${dropped === 1 ? '' : 'is'} no catálogo.`);
     // Se um item do carrinho mudou de preço, o carrinho já mostra o valor atual: nada é guardado no localStorage além das escolhas.
