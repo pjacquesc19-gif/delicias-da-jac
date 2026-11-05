@@ -512,7 +512,7 @@
       "id": "natal-rabanadas-recheadas",
       "category": "ceia",
       "name": "Rabanadas Recheadas",
-      "description": "Rabanadas com recheio à sua escolha.",
+      "description": "Recheios disponíveis: Doce de Leite, Brigadeiro ao Leite, Ninho com Nutella e Kinder Bueno. Ao adicionar, escreva o recheio e a quantidade de cada um.",
       "price": 8,
       "priceUnit": "a unidade",
       "unit": [
@@ -526,12 +526,7 @@
         "natal-rabanadas-recheadas.jpg"
       ],
       "badge": null,
-      "flavors": [
-        "Doce de Leite",
-        "Brigadeiro ao Leite",
-        "Ninho com Nutella",
-        "Kinder Bueno"
-      ],
+      "flavors": [],
       "flavorChoice": "one",
       "minPerColor": null,
       "colors": [],

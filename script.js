@@ -95,8 +95,23 @@
      O servidor das encomendas confere as mesmas regras com o arquivo publicado.
      ===================================================================== */
   const season = () => (DATA && DATA.meta && DATA.meta.catalogo) || null;
-  // A abertura (frase e foto) é só do catálogo principal; nos sazonais, some antes de a página aparecer.
-  if (PAGE_CATALOG) { const hero = $('.hero'); if (hero) hero.hidden = true; }
+  // Frase de abertura de cada catálogo sazonal. Sem texto aqui, usa o nome e a descrição do catálogo.
+  const SEASON_HERO = {
+    'natal-2026': { titulo: 'Um Natal cheio de doçura', texto: 'Feitos artesanalmente, com todo o carinho. Escolha no catálogo, monte seu pedido e envie sua encomenda.' },
+  };
+  function applySeasonHero(id, c) {
+    const h = SEASON_HERO[id] || (c ? { titulo: c.nome, texto: c.descricao } : null);
+    if (!h) return;
+    const title = $('.hero h1'), text = $('.hero-text p, .hero .wrap > p');
+    if (title) title.textContent = h.titulo;
+    if (text) text.textContent = h.texto || '';
+  }
+  if (PAGE_CATALOG) applySeasonHero(PAGE_CATALOG);   // antes de a página aparecer, sem piscar a frase do catálogo principal
+
+  // Produto em que a cliente escreve os detalhes no campo de texto (obrigatório), em vez de escolher opções.
+  const NOTE_PROMPT = {
+    'natal-rabanadas-recheadas': { label: 'Recheios e quantidades', placeholder: 'Ex.: 5x doce de leite, 3x brigadeiro ao leite', hint: 'Em "Quantidade", informe o total de rabanadas.', error: 'Escreva os recheios e a quantidade de cada um.' },
+  };
   const catalogId = () => (season() && season().id) || PAGE_CATALOG || '';
   function seasonState() {
     const c = season();
@@ -122,7 +137,8 @@
     let el = $('#season-banner');
     if (!c) { if (el) el.remove(); return; }
     document.title = `${c.nome} · ${DATA.meta.brand}`;
-    const hero = $('.hero'); if (hero) hero.hidden = true;   // também na prévia do painel, que não tem a marcação da página
+    applySeasonHero(c.id, c);   // também na prévia do painel, que não tem a marcação da página
+    const hero = $('.hero'); if (hero) hero.hidden = c.status === 'arquivado';
     if (!el) { el = document.createElement('section'); el.id = 'season-banner'; el.className = 'season-banner'; $('main').prepend(el); }
     const st = seasonState();
     el.innerHTML = `<div class="wrap"><p class="sb-kicker">Catálogo especial</p><h2>${esc(c.nome)}</h2>`
@@ -433,8 +449,9 @@
             <button type="button" data-act="inc" aria-label="Aumentar quantidade">+</button></div>
           <p class="hint" id="m-qhelp"></p><p class="err-inline" id="m-qerr" role="alert"></p>
         </div>
-        <label class="f"><span>${p.customizable ? 'Detalhes da personalização (opcional)' : 'Observações (opcional)'}</span>
-          <textarea id="m-note" rows="2" maxlength="300" placeholder="Algo mais que a confeitaria precise saber?">${esc(d.note)}</textarea></label>
+        <label class="f" id="m-note-box"><span>${NOTE_PROMPT[p.id] ? esc(NOTE_PROMPT[p.id].label) : p.customizable ? 'Detalhes da personalização (opcional)' : 'Observações (opcional)'}</span>
+          <textarea id="m-note" rows="2" maxlength="300" placeholder="${esc(NOTE_PROMPT[p.id] ? NOTE_PROMPT[p.id].placeholder : 'Algo mais que a confeitaria precise saber?')}">${esc(d.note)}</textarea></label>
+        ${NOTE_PROMPT[p.id] ? `<p class="hint">${esc(NOTE_PROMPT[p.id].hint)}</p>` : ''}
       </form>`;
     $('#m-foot').innerHTML = `
       <div class="m-total"><span>Subtotal</span><strong id="m-sub"></strong></div>
@@ -470,6 +487,7 @@
       if (!d.flavors.length) errs.push(['m-flavors', 'Escolha pelo menos um sabor.']);
       else if (c.maxFlavors && d.flavors.length > c.maxFlavors) errs.push(['m-flavors', `Escolha no máximo ${c.maxFlavors} ${plural(c.maxFlavors, 'sabor', 'sabores')}.`]);
     }
+    if (NOTE_PROMPT[p.id] && !d.note.trim()) errs.push(['m-note', NOTE_PROMPT[p.id].error]);
     const min = minEff(p, c, n), q = d.qty;
     if (!Number.isFinite(q) || q <= 0) errs.push(['m-qty', 'Informe a quantidade desejada.']);
     else if (!Number.isInteger(q)) errs.push(['m-qty', p.gramsPerUnit ? `Informe a quantidade em múltiplos de ${p.gramsPerUnit} g.` : 'Informe um número inteiro.']);
@@ -589,7 +607,7 @@
       const { p } = ctx(d), raw = t.value.trim() === '' ? NaN : Number(t.value.replace(',', '.'));
       d.qty = Number.isFinite(raw) ? raw / (p.gramsPerUnit || 1) : NaN;
       syncModal();
-    } else if (t.id === 'm-note') d.note = t.value;
+    } else if (t.id === 'm-note') { d.note = t.value; if (d.tried) syncModal(); }
     else if (t.id === 'm-theme-text') { d.themeText = t.value; syncModal(); }
     else if (t.id === 'm-color-text') {
       d.colors = t.value.trim() ? [{ name: t.value, custom: true, hex: '' }] : [];
